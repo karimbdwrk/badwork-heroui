@@ -18,6 +18,7 @@ export interface ThemeSwitchProps {
 export const ThemeSwitch: FC<ThemeSwitchProps> = ({
   className,
   classNames,
+  children,
 }) => {
   const { theme, setTheme } = useTheme();
   const isSSR = useIsSSR();
