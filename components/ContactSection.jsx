@@ -3,7 +3,6 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { addToast } from "@heroui/toast";
@@ -18,25 +17,42 @@ const ContactSection = () => {
 		},
 		validationSchema: Yup.object({
 			name: Yup.string()
-				.min(2, "Your name must be at least 2 characters")
-				.required("Name is required"),
+				.min(2, "At least 2 chars")
+				.required("Name required"),
 			email: Yup.string()
-				.email("Invalid email address")
-				.required("Email is required"),
+				.email("Invalid email")
+				.required("Email required"),
 			subject: Yup.string()
-				.min(3, "Subject must be at least 3 characters")
-				.required("Subject is required"),
+				.min(3, "At least 3 chars")
+				.required("Subject required"),
 			description: Yup.string()
-				.min(10, "Message must be at least 10 characters")
-				.required("Description is required"),
+				.min(10, "At least 10 chars")
+				.required("Description required"),
 		}),
-		onSubmit: (values, { resetForm }) => {
-			console.log("Form submitted:", values);
-			addToast({
-				title: "Message Sent ✅",
-				description: "Your message has been sent successfully!",
-			});
-			resetForm();
+		onSubmit: async (values, { resetForm }) => {
+			try {
+				const res = await fetch("/api/contact", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(values),
+				});
+
+				if (!res.ok) throw new Error("Failed to send");
+
+				addToast({
+					title: "✅ Message sent!",
+					description: "Your message was successfully delivered.",
+				});
+
+				resetForm();
+			} catch (error) {
+				console.error(error);
+				addToast({
+					title: "❌ Error",
+					description:
+						"Failed to send your message. Please try again.",
+				});
+			}
 		},
 	});
 
@@ -50,8 +66,8 @@ const ContactSection = () => {
 				<Input
 					name='name'
 					label='Name'
-					placeholder='Enter your name'
 					isRequired
+					placeholder='Enter your name'
 					value={formik.values.name}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -60,10 +76,10 @@ const ContactSection = () => {
 				/>
 				<Input
 					name='email'
-					label='Email'
 					type='email'
-					placeholder='Enter your email'
+					label='Email'
 					isRequired
+					placeholder='Enter your email'
 					value={formik.values.email}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -73,8 +89,8 @@ const ContactSection = () => {
 				<Input
 					name='subject'
 					label='Subject'
-					placeholder='Enter your subject'
 					isRequired
+					placeholder='Enter your subject'
 					value={formik.values.subject}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -88,9 +104,9 @@ const ContactSection = () => {
 				<Textarea
 					name='description'
 					label='Description'
-					placeholder='Enter your message'
 					isRequired
 					minRows={4}
+					placeholder='Enter your message'
 					value={formik.values.description}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -106,17 +122,7 @@ const ContactSection = () => {
 					type='submit'
 					color='primary'
 					isDisabled={formik.isSubmitting}>
-					Send
-				</Button>
-				<Button
-					variant='flat'
-					onPress={() =>
-						addToast({
-							title: "Toast test",
-							description: "Toast displayed successfully",
-						})
-					}>
-					Show Toast
+					{formik.isSubmitting ? "Sending..." : "Send"}
 				</Button>
 			</form>
 		</div>
