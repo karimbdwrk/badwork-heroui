@@ -4,3 +4,7 @@
 .wesh #morray {
   display: flex;
 }
+
+#redeviation-bs-indicator {
+  display: none !important;
+}
