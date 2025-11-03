@@ -58,7 +58,6 @@ const ContactSection = () => {
 					isInvalid={formik.touched.name && !!formik.errors.name}
 					errorMessage={formik.touched.name && formik.errors.name}
 				/>
-
 				<Input
 					name='email'
 					label='Email'
@@ -71,7 +70,6 @@ const ContactSection = () => {
 					isInvalid={formik.touched.email && !!formik.errors.email}
 					errorMessage={formik.touched.email && formik.errors.email}
 				/>
-
 				<Input
 					name='subject'
 					label='Subject'
@@ -87,7 +85,6 @@ const ContactSection = () => {
 						formik.touched.subject && formik.errors.subject
 					}
 				/>
-
 				<Textarea
 					name='description'
 					label='Description'
@@ -105,14 +102,12 @@ const ContactSection = () => {
 						formik.touched.description && formik.errors.description
 					}
 				/>
-
 				<Button
 					type='submit'
 					color='primary'
 					isDisabled={formik.isSubmitting}>
 					Send
 				</Button>
-
 				<Button
 					variant='flat'
 					onPress={() =>
