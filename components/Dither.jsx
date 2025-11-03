@@ -196,6 +196,10 @@ function DitheredWaves({
 	});
 
 	useEffect(() => {
+		gl.setSize(window.innerWidth, window.innerHeight);
+	}, [gl]);
+
+	useEffect(() => {
 		const dpr = gl.getPixelRatio();
 		const w = Math.floor(size.width * dpr),
 			h = Math.floor(size.height * dpr);
