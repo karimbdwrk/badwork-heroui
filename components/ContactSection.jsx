@@ -7,6 +7,10 @@ import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { addToast } from "@heroui/toast";
 
+// 💡 Importez votre client Supabase
+// Ajustez le chemin si nécessaire.
+import { supabase } from "@/lib/supabase";
+
 const ContactSection = () => {
 	const formik = useFormik({
 		initialValues: {
@@ -25,19 +29,37 @@ const ContactSection = () => {
 			subject: Yup.string()
 				.min(3, "At least 3 chars")
 				.required("Subject required"),
-			description: Yup.string()
+			message: Yup.string()
 				.min(10, "At least 10 chars")
-				.required("Description required"),
+				.required("Message required"),
 		}),
 		onSubmit: async (values, { resetForm }) => {
-			try {
-				const res = await fetch("/api/contact", {
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify(values),
-				});
+			// L'objet 'values' contient name, email, subject, message
+			// qui correspondent aux colonnes de votre table.
 
-				if (!res.ok) throw new Error("Failed to send");
+			try {
+				// 🚀 Utilisation de supabase-js pour l'insertion
+				const { error } = await supabase
+					.from("contact_messages") // Nom de la table
+					.insert([
+						// Supabase s'attend à un tableau d'objets pour `insert`
+						{
+							name: values.name,
+							email: values.email,
+							subject: values.subject,
+							message: values.message,
+						},
+					]);
+
+				// 💡 Gestion de l'erreur
+				// Si `error` n'est pas null, nous levons une erreur pour être capturée par le `catch`.
+				if (error) {
+					console.error("Supabase Error:", error);
+					// On peut jeter l'erreur pour la capturer dans le bloc catch
+					throw new Error(
+						error.message || "Supabase insertion failed."
+					);
+				}
 
 				addToast({
 					title: "✅ Message sent!",
@@ -46,7 +68,7 @@ const ContactSection = () => {
 
 				resetForm();
 			} catch (error) {
-				console.error(error);
+				console.error("General Error or Supabase Error:", error);
 				addToast({
 					title: "❌ Error",
 					description:
@@ -55,6 +77,8 @@ const ContactSection = () => {
 			}
 		},
 	});
+
+	// --- Le JSX reste inchangé ---
 
 	return (
 		<div
@@ -102,20 +126,19 @@ const ContactSection = () => {
 					}
 				/>
 				<Textarea
-					name='description'
-					label='Description'
+					name='message'
+					label='Message'
 					isRequired
 					minRows={4}
 					placeholder='Enter your message'
-					value={formik.values.description}
+					value={formik.values.message}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
 					isInvalid={
-						formik.touched.description &&
-						!!formik.errors.description
+						formik.touched.message && !!formik.errors.message
 					}
 					errorMessage={
-						formik.touched.description && formik.errors.description
+						formik.touched.message && formik.errors.message
 					}
 				/>
 				<Button
