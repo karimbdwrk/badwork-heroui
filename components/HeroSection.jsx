@@ -17,10 +17,10 @@ export default function HeroSection() {
 			<HeroBackground />
 			<div className='intro flex flex-col items-center justify-center z-10 text-center px-4'>
 				<h1
-					className={`${russoOne.className} text-9xl font-bold hero-title`}>
+					className={`${russoOne.className} text-6xl sm:text-9xl font-bold hero-title`}>
 					BADWORK
 				</h1>
-				<p>
+				<p className='text-xs sm:text-lg'>
 					Design and creation converge to shape human-centered
 					experiences.
 				</p>
