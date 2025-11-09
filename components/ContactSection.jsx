@@ -82,7 +82,7 @@ const ContactSection = () => {
 
 	return (
 		<div
-			className='contact-section h-screen w-screen overflow-hidden flex flex-col items-center justify-center'
+			className='contact-section h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
 			<form
 				onSubmit={formik.handleSubmit}
