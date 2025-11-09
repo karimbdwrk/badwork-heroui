@@ -143,7 +143,7 @@ const ContactSection = () => {
 				/>
 				<Button
 					type='submit'
-					color='primary'
+					className='bg-white text-black hover:bg-gray-200'
 					isDisabled={formik.isSubmitting}>
 					{formik.isSubmitting ? "Sending..." : "Send"}
 				</Button>
