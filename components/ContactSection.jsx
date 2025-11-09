@@ -21,17 +21,17 @@ const ContactSection = () => {
 		},
 		validationSchema: Yup.object({
 			name: Yup.string()
-				.min(2, "At least 2 chars")
-				.required("Name required"),
+				.min(2, "Your name must be at least 2 characters")
+				.required("Your name is required"),
 			email: Yup.string()
 				.email("Invalid email")
-				.required("Email required"),
+				.required("Your email is required"),
 			subject: Yup.string()
-				.min(3, "At least 3 chars")
-				.required("Subject required"),
+				.min(5, "Your subject must be at least 5 characters")
+				.required("Your subject is required"),
 			message: Yup.string()
-				.min(10, "At least 10 chars")
-				.required("Message required"),
+				.min(30, "Your message must be at least 30 characters")
+				.required("Your message is required"),
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			// L'objet 'values' contient name, email, subject, message
@@ -91,7 +91,6 @@ const ContactSection = () => {
 					name='name'
 					label='Name'
 					isRequired
-					placeholder='Enter your name'
 					value={formik.values.name}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -103,7 +102,6 @@ const ContactSection = () => {
 					type='email'
 					label='Email'
 					isRequired
-					placeholder='Enter your email'
 					value={formik.values.email}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -114,7 +112,6 @@ const ContactSection = () => {
 					name='subject'
 					label='Subject'
 					isRequired
-					placeholder='Enter your subject'
 					value={formik.values.subject}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
@@ -130,7 +127,6 @@ const ContactSection = () => {
 					label='Message'
 					isRequired
 					minRows={4}
-					placeholder='Enter your message'
 					value={formik.values.message}
 					onChange={formik.handleChange}
 					onBlur={formik.handleBlur}
