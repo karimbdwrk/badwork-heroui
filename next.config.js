@@ -2,7 +2,7 @@
 const nextConfig = {
 	reactStrictMode: true,
 	images: {
-		domains: ["localhost", "heroui.com"], // Ajoutez ici le domaine de vos images
+		remotePatterns: ["localhost", "heroui.com"],
 	},
 	env: {
 		NEXT_PUBLIC_SUPABASE_URL: "https://wmxnxnwivbmywhnsqgya.supabase.co",
