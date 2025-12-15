@@ -1,8 +1,9 @@
 import { Metadata } from "next";
 
 export const metadata = {
-	title: "Contact",
-	description: "Contactez-nous pour toute demande d'information",
+	title: "Legal Notice // badwork | digital",
+	description:
+		"Mentions légales du site. Informations légales, éditeur, hébergement et responsabilité.",
 };
 
 export default function ContactPage() {
