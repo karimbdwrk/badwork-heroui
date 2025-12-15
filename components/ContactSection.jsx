@@ -4,6 +4,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea } from "@heroui/input";
+import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
 import { addToast } from "@heroui/toast";
 
@@ -82,7 +83,7 @@ const ContactSection = () => {
 
 	return (
 		<div
-			className='contact-section h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
+			className='contact-section relative h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
 			<form
 				onSubmit={formik.handleSubmit}
@@ -144,6 +145,21 @@ const ContactSection = () => {
 					{formik.isSubmitting ? "Sending..." : "Send"}
 				</Button>
 			</form>
+			<div
+				style={{
+					position: "absolute",
+					bottom: 0,
+					paddingBottom: 10,
+					width: "100%",
+					textAlign: "center",
+				}}>
+				<Link href='/mentions-legales' className='text-white'>
+					Legal notice
+				</Link>
+				<p className='text-xs text-gray-600 mt-2'>
+					©2025 - badwork | digital - All rights reserved.
+				</p>
+			</div>
 		</div>
 	);
 };
