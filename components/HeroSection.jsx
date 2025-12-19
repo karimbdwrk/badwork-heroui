@@ -12,6 +12,36 @@ export default function HeroSection() {
 		}
 	};
 
+	const sendEmail = async () => {
+		try {
+			console.log("Sending test email...");
+
+			const res = await fetch("/api/send-email", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					to: "karim@badwork.fr",
+					subject: "Hello depuis Next.js 15",
+					html: "<p>Email envoyé avec <strong>Resend</strong> 🚀</p>",
+				}),
+			});
+
+			// ❗ fetch ne throw PAS automatiquement
+			if (!res.ok) {
+				const error = await res.json();
+				console.error("Email error:", error);
+				throw new Error(error?.message || "Failed to send email");
+			}
+
+			const data = await res.json();
+			console.log("Email sent successfully:", data);
+		} catch (err) {
+			console.error("sendEmail failed:", err.message);
+		}
+	};
+
 	return (
 		<div className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'>
 			<HeroBackground />
@@ -29,6 +59,12 @@ export default function HeroSection() {
 					// radius='full'
 					onPress={() => scrollToSection("contact")}>
 					CONTACT US
+				</Button>
+				<Button
+					className='mt-12 bg-white text-black hover:bg-gray-200 pl-12 pr-12'
+					// radius='full'
+					onPress={sendEmail}>
+					test email
 				</Button>
 			</div>
 		</div>
