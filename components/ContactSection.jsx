@@ -69,6 +69,13 @@ const ContactSection = () => {
 					values.message
 				);
 
+				sendEmail2(
+					values.name,
+					values.email,
+					values.subject,
+					values.message
+				);
+
 				addToast({
 					title: "✅ Message sent!",
 					description: "Your message was successfully delivered.",
@@ -99,6 +106,36 @@ const ContactSection = () => {
 					to: email,
 					subject: subject,
 					html: `<p>Name: ${name}</p><br /><br /><p>${message}</p>`,
+				}),
+			});
+
+			// ❗ fetch ne throw PAS automatiquement
+			if (!res.ok) {
+				const error = await res.json();
+				console.error("Email error:", error);
+				throw new Error(error?.message || "Failed to send email");
+			}
+
+			const data = await res.json();
+			console.log("Email sent successfully:", data);
+		} catch (err) {
+			console.error("sendEmail failed:", err.message);
+		}
+	};
+
+	const sendEmail2 = async (name, email, subject, message) => {
+		try {
+			console.log("Sending test email...");
+
+			const res = await fetch("/api/send-email", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					to: "krimobadworker@gmail.com",
+					subject: subject,
+					html: `<p>Name: ${name}</p><br /><br /><p>Email: ${email}</p><br /><br /><p>${message}</p>`,
 				}),
 			});
 
