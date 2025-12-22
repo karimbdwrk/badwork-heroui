@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import "@/styles/styles.css";
 import { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Link } from "@heroui/link";
 import clsx from "clsx";
 
