@@ -40,27 +40,34 @@ const ContactSection = () => {
 
 			try {
 				// 🚀 Utilisation de supabase-js pour l'insertion
-				const { error } = await supabase
-					.from("contact_messages") // Nom de la table
-					.insert([
-						// Supabase s'attend à un tableau d'objets pour `insert`
-						{
-							name: values.name,
-							email: values.email,
-							subject: values.subject,
-							message: values.message,
-						},
-					]);
+				// const { error } = await supabase
+				// 	.from("contact_messages") // Nom de la table
+				// 	.insert([
+				// 		// Supabase s'attend à un tableau d'objets pour `insert`
+				// 		{
+				// 			name: values.name,
+				// 			email: values.email,
+				// 			subject: values.subject,
+				// 			message: values.message,
+				// 		},
+				// 	]);
 
-				// 💡 Gestion de l'erreur
-				// Si `error` n'est pas null, nous levons une erreur pour être capturée par le `catch`.
-				if (error) {
-					console.error("Supabase Error:", error);
-					// On peut jeter l'erreur pour la capturer dans le bloc catch
-					throw new Error(
-						error.message || "Supabase insertion failed."
-					);
-				}
+				// // 💡 Gestion de l'erreur
+				// // Si `error` n'est pas null, nous levons une erreur pour être capturée par le `catch`.
+				// if (error) {
+				// 	console.error("Supabase Error:", error);
+				// 	// On peut jeter l'erreur pour la capturer dans le bloc catch
+				// 	throw new Error(
+				// 		error.message || "Supabase insertion failed."
+				// 	);
+				// }
+
+				sendEmail(
+					values.name,
+					values.email,
+					values.subject,
+					values.message
+				);
 
 				addToast({
 					title: "✅ Message sent!",
@@ -79,7 +86,35 @@ const ContactSection = () => {
 		},
 	});
 
-	// --- Le JSX reste inchangé ---
+	const sendEmail = async (name, email, subject, message) => {
+		try {
+			console.log("Sending test email...");
+
+			const res = await fetch("/api/send-email", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					to: email,
+					subject: subject,
+					html: `<p>Name: ${name}</p><br /><br /><p>${message}</p>`,
+				}),
+			});
+
+			// ❗ fetch ne throw PAS automatiquement
+			if (!res.ok) {
+				const error = await res.json();
+				console.error("Email error:", error);
+				throw new Error(error?.message || "Failed to send email");
+			}
+
+			const data = await res.json();
+			console.log("Email sent successfully:", data);
+		} catch (err) {
+			console.error("sendEmail failed:", err.message);
+		}
+	};
 
 	return (
 		<div
