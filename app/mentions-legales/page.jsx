@@ -1,6 +1,10 @@
 import { Metadata } from "next";
 
 export const metadata = {
+	robots: {
+		index: false,
+		follow: false,
+	},
 	title: "Legal Notice // badwork | digital",
 	description:
 		"Mentions légales du site. Informations légales, éditeur, hébergement et responsabilité.",
