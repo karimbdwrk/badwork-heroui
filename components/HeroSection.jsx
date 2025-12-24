@@ -25,10 +25,7 @@ export default function HeroSection() {
 		<div className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'>
 			<HeroBackground />
 			<div className='intro flex flex-col items-center justify-center z-10 text-center px-4'>
-				{/* <h1
-					className={`${russoOne.className} text-6xl sm:text-9xl font-bold hero-title`}>
-					BADWORK
-				</h1> */}
+				<h1 className={`hidden`}>BADWORK</h1>
 				<Image
 					alt='HeroUI hero Image'
 					src='https://badwork-bucket.s3.eu-west-3.amazonaws.com/newbad-stretch.svg'
