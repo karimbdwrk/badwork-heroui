@@ -159,7 +159,7 @@ const ContactSection = () => {
 		<div
 			className='contact-section relative h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
-			{isSend ? (
+			{!isSend ? (
 				<form
 					onSubmit={formik.handleSubmit}
 					className='contact-form flex flex-col w-full flex-wrap md:flex-nowrap gap-4 max-w-xl'>
