@@ -11,6 +11,8 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 
+import { Roboto_Mono } from "next/font/google";
+
 export const metadata = {
 	title: {
 		default: siteConfig.name,
@@ -22,6 +24,12 @@ export const metadata = {
 	},
 };
 
+const robotoMono = Roboto_Mono({
+	subsets: ["latin"],
+	weight: ["400", "500", "700"],
+	variable: "--font-roboto-mono",
+});
+
 export const viewport = {
 	themeColor: [
 		{ media: "(prefers-color-scheme: light)", color: "white" },
@@ -31,7 +39,10 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html suppressHydrationWarning lang='en'>
+		<html
+			suppressHydrationWarning
+			lang='en'
+			className={robotoMono.variable}>
 			<head>
 				<Script
 					id='gtm'
@@ -47,7 +58,7 @@ export default function RootLayout({ children }) {
 					}}
 				/>
 			</head>
-			<body>
+			<body className={robotoMono.className}>
 				<noscript>
 					<iframe
 						src='https://www.googletagmanager.com/ns.html?id=GTM-TZNCBWL2'
