@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea } from "@heroui/input";
@@ -13,6 +13,8 @@ import { addToast } from "@heroui/toast";
 import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
+	const [isSend, setIsSend] = useState(false);
+
 	const formik = useFormik({
 		initialValues: {
 			name: "",
@@ -80,7 +82,7 @@ const ContactSection = () => {
 					title: "✅ Message sent!",
 					description: "Your message was successfully delivered.",
 				});
-
+				setIsSend(true);
 				resetForm();
 			} catch (error) {
 				console.error("General Error or Supabase Error:", error);
@@ -157,66 +159,82 @@ const ContactSection = () => {
 		<div
 			className='contact-section relative h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
-			<form
-				onSubmit={formik.handleSubmit}
-				className='contact-form flex flex-col w-full flex-wrap md:flex-nowrap gap-4 max-w-xl'>
-				<Input
-					name='name'
-					label='Name'
-					isRequired
-					value={formik.values.name}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					isInvalid={formik.touched.name && !!formik.errors.name}
-					errorMessage={formik.touched.name && formik.errors.name}
-				/>
-				<Input
-					name='email'
-					type='email'
-					label='Email'
-					isRequired
-					value={formik.values.email}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					isInvalid={formik.touched.email && !!formik.errors.email}
-					errorMessage={formik.touched.email && formik.errors.email}
-				/>
-				<Input
-					name='subject'
-					label='Subject'
-					isRequired
-					value={formik.values.subject}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					isInvalid={
-						formik.touched.subject && !!formik.errors.subject
-					}
-					errorMessage={
-						formik.touched.subject && formik.errors.subject
-					}
-				/>
-				<Textarea
-					name='message'
-					label='Message'
-					isRequired
-					minRows={4}
-					value={formik.values.message}
-					onChange={formik.handleChange}
-					onBlur={formik.handleBlur}
-					isInvalid={
-						formik.touched.message && !!formik.errors.message
-					}
-					errorMessage={
-						formik.touched.message && formik.errors.message
-					}
-				/>
-				<Button
-					type='submit'
-					className='bg-white text-black hover:bg-gray-200'
-					isDisabled={formik.isSubmitting}>
-					{formik.isSubmitting ? "Sending..." : "Send"}
-				</Button>
-			</form>
+			{isSend ? (
+				<form
+					onSubmit={formik.handleSubmit}
+					className='contact-form flex flex-col w-full flex-wrap md:flex-nowrap gap-4 max-w-xl'>
+					<Input
+						name='name'
+						label='Name'
+						isRequired
+						value={formik.values.name}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						isInvalid={formik.touched.name && !!formik.errors.name}
+						errorMessage={formik.touched.name && formik.errors.name}
+					/>
+					<Input
+						name='email'
+						type='email'
+						label='Email'
+						isRequired
+						value={formik.values.email}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						isInvalid={
+							formik.touched.email && !!formik.errors.email
+						}
+						errorMessage={
+							formik.touched.email && formik.errors.email
+						}
+					/>
+					<Input
+						name='subject'
+						label='Subject'
+						isRequired
+						value={formik.values.subject}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						isInvalid={
+							formik.touched.subject && !!formik.errors.subject
+						}
+						errorMessage={
+							formik.touched.subject && formik.errors.subject
+						}
+					/>
+					<Textarea
+						name='message'
+						label='Message'
+						isRequired
+						minRows={4}
+						value={formik.values.message}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						isInvalid={
+							formik.touched.message && !!formik.errors.message
+						}
+						errorMessage={
+							formik.touched.message && formik.errors.message
+						}
+					/>
+					<Button
+						type='submit'
+						className='bg-white text-black hover:bg-gray-200'
+						isDisabled={formik.isSubmitting}>
+						{formik.isSubmitting ? "Sending..." : "Send"}
+					</Button>
+				</form>
+			) : (
+				<div className='text-center'>
+					<h2 className='text-2xl font-bold mb-4'>
+						Thank you for reaching out!
+					</h2>
+					<p className='mb-4'>
+						We have received your message and will get back to you
+						shortly.
+					</p>
+				</div>
+			)}
 			<div
 				style={{
 					position: "absolute",
