@@ -64,6 +64,7 @@
     "@types/stats.js": "^0.17.4",
     "@types/three": "^0.180.0",
     "@webgpu/types": "^0.1.66",
+    "animejs": "^3.2.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "fflate": "^0.8.2",
