@@ -6,6 +6,7 @@ import { Button } from "@heroui/button";
 import { Image } from "@heroui/react";
 import { russoOne } from "@/app/fonts";
 import HeroBackground from "@/components/HeroBackground";
+import LogoMorph from "@/components/LogoMorph";
 
 export default function HeroSection() {
 	const [isMobile, setIsMobile] = useState(false);
@@ -32,6 +33,7 @@ export default function HeroSection() {
 					width={isMobile ? 350 : 900}
 					radius='none'
 				/>
+				<LogoMorph />
 				<p className='text-xs sm:text-lg mt-4'>
 					Design and creation converge to shape human-centered
 					experiences.
