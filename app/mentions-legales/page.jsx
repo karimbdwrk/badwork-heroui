@@ -12,11 +12,13 @@ export const metadata = {
 
 export default function LegalPage() {
 	return (
-		<main>
-			<h1>Mentions légales</h1>
+		<main className='legal-page max-w-3xl mx-auto p-6'>
+			<h1 className='text-3xl font-bold mb-6'>Mentions légales</h1>
 
 			<section>
-				<h2>Éditeur du site</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Éditeur du site
+				</h2>
 				<p>
 					Nom : <strong>Nom Prénom</strong>
 					<br />
@@ -32,12 +34,14 @@ export default function LegalPage() {
 			</section>
 
 			<section>
-				<h2>Responsable de la publication</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Responsable de la publication
+				</h2>
 				<p>Nom Prénom</p>
 			</section>
 
 			<section>
-				<h2>Hébergement</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>Hébergement</h2>
 				<p>
 					Hébergeur : <strong>Vercel Inc.</strong>
 					<br />
@@ -51,7 +55,9 @@ export default function LegalPage() {
 			</section>
 
 			<section>
-				<h2>Propriété intellectuelle</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Propriété intellectuelle
+				</h2>
 				<p>
 					L’ensemble des contenus présents sur ce site (textes,
 					images, graphismes, logo, icônes, etc.) sont la propriété
@@ -62,7 +68,9 @@ export default function LegalPage() {
 			</section>
 
 			<section>
-				<h2>Responsabilité</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Responsabilité
+				</h2>
 				<p>
 					L’éditeur du site ne saurait être tenu responsable des
 					erreurs ou omissions dans les informations diffusées ni de
@@ -71,7 +79,9 @@ export default function LegalPage() {
 			</section>
 
 			<section>
-				<h2>Données personnelles</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Données personnelles
+				</h2>
 				<p>
 					Les données personnelles collectées via le formulaire de
 					contact sont utilisées uniquement pour répondre aux
@@ -84,7 +94,9 @@ export default function LegalPage() {
 			</section>
 
 			<section>
-				<h2>Droit applicable</h2>
+				<h2 className='text-xl font-semibold mt-6 mb-4'>
+					Droit applicable
+				</h2>
 				<p>
 					Le présent site est soumis au droit français. En cas de
 					litige, les tribunaux compétents seront ceux du ressort du
