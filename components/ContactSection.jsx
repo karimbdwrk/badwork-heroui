@@ -243,7 +243,7 @@ const ContactSection = () => {
 					width: "100%",
 					textAlign: "center",
 				}}>
-				<Link href='/mentions-legales' className='text-white'>
+				<Link href='/legal' className='text-white'>
 					Legal notice
 				</Link>
 				<p className='text-xs text-gray-600 mt-2'>
