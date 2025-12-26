@@ -27,12 +27,12 @@ export default function HeroSection() {
 			<HeroBackground />
 			<div className='intro flex flex-col items-center justify-center z-10 text-center px-4'>
 				<h1 className={`hidden`}>BADWORK</h1>
-				<Image
+				{/* <Image
 					alt='HeroUI hero Image'
 					src='https://badwork-bucket.s3.eu-west-3.amazonaws.com/newbad-stretch.svg'
 					width={isMobile ? 350 : 900}
 					radius='none'
-				/>
+				/> */}
 				<LogoMorph />
 				<p className='text-xs sm:text-lg mt-4'>
 					Design and creation converge to shape human-centered
