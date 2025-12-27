@@ -9,54 +9,135 @@ export default function HeroSection() {
 
 	const heroRef = useRef(null);
 	const eyesRef = useRef(null);
+	const blinkRef = useRef(null);
+
+	// position cible (curseur)
+	const target = useRef({ x: 0, y: 0 });
+	// position actuelle (avec inertie)
+	const current = useRef({ x: 0, y: 0 });
+	const idleTimeout = useRef(null);
 
 	useEffect(() => {
 		setIsMobile(window.innerWidth < 450);
 	}, []);
 
+	/* ===============================
+	   SUIVI SOURIS / TOUCH
+	================================ */
 	useEffect(() => {
 		const hero = heroRef.current;
-		const eyes = eyesRef.current;
-		if (!hero || !eyes) return;
+		if (!hero) return;
 
-		const MAX_X = 14; // amplitude horizontale
-		const MAX_Y = 10; // amplitude verticale
-
-		const updateEyes = (clientX, clientY) => {
+		const updateTarget = (clientX, clientY) => {
 			const rect = hero.getBoundingClientRect();
+			target.current.x = (clientX - rect.left) / rect.width - 0.5;
+			target.current.y = (clientY - rect.top) / rect.height - 0.5;
 
-			const x = (clientX - rect.left) / rect.width - 0.5;
-			const y = (clientY - rect.top) / rect.height - 0.5;
-
-			eyes.style.transform = `translate(${x * MAX_X * 2}px, ${
-				y * MAX_Y * 2
-			}px)`;
+			resetIdle();
 		};
 
-		const handleMouseMove = (e) => {
-			updateEyes(e.clientX, e.clientY);
-		};
+		const mouseMove = (e) => updateTarget(e.clientX, e.clientY);
 
-		const handleTouch = (e) => {
+		const touchMove = (e) => {
 			if (!e.touches[0]) return;
-			updateEyes(e.touches[0].clientX, e.touches[0].clientY);
+			updateTarget(e.touches[0].clientX, e.touches[0].clientY);
 		};
 
-		hero.addEventListener("mousemove", handleMouseMove);
-		hero.addEventListener("touchstart", handleTouch, { passive: true });
-		hero.addEventListener("touchmove", handleTouch, { passive: true });
+		hero.addEventListener("mousemove", mouseMove);
+		hero.addEventListener("touchstart", touchMove, {
+			passive: true,
+		});
+		hero.addEventListener("touchmove", touchMove, {
+			passive: true,
+		});
 
 		return () => {
-			hero.removeEventListener("mousemove", handleMouseMove);
-			hero.removeEventListener("touchstart", handleTouch);
-			hero.removeEventListener("touchmove", handleTouch);
+			hero.removeEventListener("mousemove", mouseMove);
+			hero.removeEventListener("touchstart", touchMove);
+			hero.removeEventListener("touchmove", touchMove);
 		};
+	}, []);
+
+	/* ===============================
+	   INERTIE + LIMITE ELLIPTIQUE
+	================================ */
+	useEffect(() => {
+		const eyes = eyesRef.current;
+		if (!eyes) return;
+
+		const MAX_X = 14;
+		const MAX_Y = 10;
+		const EASING = 0.08;
+
+		let raf;
+
+		const loop = () => {
+			// inertie
+			current.current.x +=
+				(target.current.x - current.current.x) * EASING;
+			current.current.y +=
+				(target.current.y - current.current.y) * EASING;
+
+			// limite elliptique
+			const dx = current.current.x * 2;
+			const dy = current.current.y * 2;
+			const len = Math.sqrt(dx * dx + dy * dy);
+			if (len > 1) {
+				current.current.x /= len;
+				current.current.y /= len;
+			}
+
+			eyes.style.transform = `translate(${
+				current.current.x * MAX_X * 2
+			}px, ${current.current.y * MAX_Y * 2}px)`;
+
+			raf = requestAnimationFrame(loop);
+		};
+
+		loop();
+		return () => cancelAnimationFrame(raf);
+	}, []);
+
+	/* ===============================
+	   RETOUR AU CENTRE (IDLE)
+	================================ */
+	const resetIdle = () => {
+		if (idleTimeout.current) clearTimeout(idleTimeout.current);
+
+		idleTimeout.current = setTimeout(() => {
+			target.current = { x: 0, y: 0 };
+		}, 1200);
+	};
+
+	/* ===============================
+	   CLIGNEMENT DES YEUX
+	================================ */
+	useEffect(() => {
+		const blink = blinkRef.current;
+		if (!blink) return;
+
+		const blinkOnce = () => {
+			blink.style.transform = "scaleY(0.1)";
+			setTimeout(() => {
+				blink.style.transform = "scaleY(1)";
+			}, 120);
+		};
+
+		const randomBlink = () => {
+			blinkOnce();
+			setTimeout(randomBlink, 3000 + Math.random() * 4000);
+		};
+
+		randomBlink();
 	}, []);
 
 	const scrollToSection = (id) => {
 		const element = document.getElementById(id);
 		if (element) {
-			element.scrollIntoView({ behavior: "smooth", block: "start" });
+			element.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
 		}
 	};
 
