@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function LegalPage() {
 	return (
-		<main className='legal-page max-w-3xl mx-auto p-6'>
+		<main className='legal-page max-w-3xl mx-auto p-6 pt-24'>
 			<h1 className='text-3xl font-bold mb-6'>Mentions légales</h1>
 
 			<section>
@@ -104,9 +104,9 @@ export default function LegalPage() {
 				</p>
 			</section>
 
-			<p class='update'>
+			<p className='update'>
 				Dernière mise à jour :{" "}
-				<time datetime='2025-01-01'>1 janvier 2025</time>
+				<time dateTime='2025-01-01'>1 janvier 2025</time>
 			</p>
 		</main>
 	);
