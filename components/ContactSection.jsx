@@ -235,7 +235,7 @@ const ContactSection = () => {
 				style={{
 					position: "absolute",
 					bottom: 0,
-					paddingBottom: 10,
+					paddingBottom: 30,
 					width: "100%",
 					textAlign: "center",
 				}}>
@@ -243,7 +243,7 @@ const ContactSection = () => {
 					Legal notice
 				</Link>
 				<p className='text-xs text-gray-600 mt-2'>
-					©2025 - badwork | digital - All rights reserved.
+					©2025 - badwork | digital - all rights reserved.
 				</p>
 			</div>
 		</div>
