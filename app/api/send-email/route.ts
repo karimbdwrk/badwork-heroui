@@ -1,31 +1,35 @@
 import { Resend } from 'resend';
 import { NextResponse } from 'next/server';
+import ContactConfirmationEmail from '../../emails/ContactConfirmationEmail';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
-    console.log("API route /send-email called");
-    console.log("resend :", resend);
-    try {
-        const { to, subject, html } = await req.json();
+  try {
+    const { to, subject, name, message, email } = await req.json();
 
-        const { data, error } = await resend.emails.send({
-            from: 'BADWORK <contact@badwork.io>', // ou ton domaine vérifié
-            to,
-            subject,
-            html,
-        });
+    const { data, error } = await resend.emails.send({
+      from: 'BADWORK <contact@badwork.io>',
+      to,
+      subject: 'Confirmation de réception — BADWORK',
+      react: ContactConfirmationEmail({
+        name,
+        email,
+        subject,
+        message,
+      }),
+    });
 
-        if (error) {
-            return NextResponse.json(error, { status: 400 });
-        }
-
-        return NextResponse.json({ success: true, data });
-    } catch (error) {
-        console.error(error);
-        return NextResponse.json(
-            { success: false, error },
-            { status: 500 }
-        );
+    if (error) {
+      return NextResponse.json(error, { status: 400 });
     }
+
+    return NextResponse.json({ success: true, data });
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      { success: false, error },
+      { status: 500 }
+    );
+  }
 }
