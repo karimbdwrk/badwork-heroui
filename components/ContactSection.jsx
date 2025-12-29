@@ -97,8 +97,6 @@ const ContactSection = () => {
 
 	const sendEmail = async (name, email, subject, message) => {
 		try {
-			console.log("Sending test email...");
-
 			const res = await fetch("/api/send-email", {
 				method: "POST",
 				headers: {
@@ -106,15 +104,15 @@ const ContactSection = () => {
 				},
 				body: JSON.stringify({
 					to: email,
-					subject: subject,
-					html: `<p>Name: ${name}</p><br /><br /><p>${message}</p>`,
+					name,
+					email,
+					subject,
+					message,
 				}),
 			});
 
-			// ❗ fetch ne throw PAS automatiquement
 			if (!res.ok) {
 				const error = await res.json();
-				console.error("Email error:", error);
 				throw new Error(error?.message || "Failed to send email");
 			}
 
@@ -127,8 +125,6 @@ const ContactSection = () => {
 
 	const sendEmail2 = async (name, email, subject, message) => {
 		try {
-			console.log("Sending test email...");
-
 			const res = await fetch("/api/send-email", {
 				method: "POST",
 				headers: {
@@ -136,15 +132,15 @@ const ContactSection = () => {
 				},
 				body: JSON.stringify({
 					to: "krimobadworker@gmail.com",
-					subject: subject,
-					html: `<p>Name: ${name}</p><br /><br /><p>Email: ${email}</p><br /><br /><p>${message}</p>`,
+					name,
+					email,
+					subject,
+					message,
 				}),
 			});
 
-			// ❗ fetch ne throw PAS automatiquement
 			if (!res.ok) {
 				const error = await res.json();
-				console.error("Email error:", error);
 				throw new Error(error?.message || "Failed to send email");
 			}
 
