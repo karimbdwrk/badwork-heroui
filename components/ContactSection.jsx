@@ -239,7 +239,9 @@ const ContactSection = () => {
 					width: "100%",
 					textAlign: "center",
 				}}>
-				<Link href='/legal' className='text-white'>
+				<Link
+					href='/legal'
+					className='text-white hover:underline underline-offset-4'>
 					Legal notice
 				</Link>
 				<p className='text-xs text-gray-600 mt-2'>
