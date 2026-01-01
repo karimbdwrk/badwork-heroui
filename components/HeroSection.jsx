@@ -180,13 +180,13 @@ export default function HeroSection() {
 					</g>
 				</svg>
 
-				<p className='text-xs sm:text-lg mt-4'>
+				<p className='text-xs sm:text-lg mt-4 select-none'>
 					Design and creation converge to shape human-centered
 					experiences.
 				</p>
 
 				<Button
-					className='mt-12 bg-white text-black hover:bg-gray-200 pl-12 pr-12'
+					className='mt-12 bg-white text-black hover:bg-gray-200 pl-12 pr-12 select-none'
 					onPress={() => scrollToSection("contact")}>
 					CONTACT US
 				</Button>
