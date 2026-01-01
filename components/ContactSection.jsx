@@ -241,11 +241,11 @@ const ContactSection = () => {
 				}}>
 				<Link
 					href='/legal'
-					className='text-white hover:underline underline-offset-4'>
+					className='text-white hover:underline underline-offset-4 text-sm select-none'>
 					Legal notice
 				</Link>
-				<p className='text-xs text-gray-600 mt-2'>
-					©2025 - badwork | digital - all rights reserved.
+				<p className='text-xs text-gray-600 mt-2 select-none'>
+					©2026 - badwork | digital - all rights reserved.
 				</p>
 			</div>
 		</div>
