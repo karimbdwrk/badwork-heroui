@@ -74,18 +74,26 @@ export default function RootLayout({ children }) {
 					<div className='flex flex-col h-screen'>
 						{/* <Navbar /> */}
 						<main>{children}</main>
-						{/* <footer className='w-full flex items-center justify-center py-3'>
+						<footer className='w-full flex flex-col items-center justify-center py-8'>
+							{/* <div
+								style={{
+									position: "absolute",
+									bottom: 0,
+									paddingBottom: 30,
+									width: "100%",
+									textAlign: "center",
+								}}> */}
 							<Link
-								isExternal
-								className='flex items-center gap-1 text-current'
-								href='https://heroui.com?utm_source=next-app-template'
-								title='heroui.com homepage'>
-								<span className='text-default-600'>
-									Powered by
-								</span>
-								<p className='text-primary'>HeroUI</p>
+								href='/legal'
+								className='text-white hover:underline underline-offset-4 text-sm select-none'>
+								Legal notice
 							</Link>
-						</footer> */}
+							<p className='text-xs text-gray-600 mt-2 select-none'>
+								©2026 - badwork | digital - all rights
+								reserved.
+							</p>
+							{/* </div> */}
+						</footer>
 					</div>
 				</Providers>
 			</body>
