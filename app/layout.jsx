@@ -10,6 +10,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import OrientationGuard from "@/components/OrientationGuard";
 
 import { Roboto_Mono } from "next/font/google";
 
@@ -71,6 +72,7 @@ export default function RootLayout({ children }) {
 				</noscript>
 				<Providers
 					themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+					<OrientationGuard />
 					<div className='flex flex-col h-screen'>
 						{/* <Navbar /> */}
 						<main>{children}</main>
