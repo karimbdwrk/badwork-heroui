@@ -231,23 +231,6 @@ const ContactSection = () => {
 					</p>
 				</div>
 			)}
-			<div
-				style={{
-					position: "absolute",
-					bottom: 0,
-					paddingBottom: 30,
-					width: "100%",
-					textAlign: "center",
-				}}>
-				<Link
-					href='/legal'
-					className='text-white hover:underline underline-offset-4 text-sm select-none'>
-					Legal notice
-				</Link>
-				<p className='text-xs text-gray-600 mt-2 select-none'>
-					©2026 - badwork | digital - all rights reserved.
-				</p>
-			</div>
 		</div>
 	);
 };
