@@ -153,7 +153,7 @@ const ContactSection = () => {
 
 	return (
 		<div
-			className='contact-section relative h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
+			className='contact-section relative min-h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
 			{!isSend ? (
 				<form
