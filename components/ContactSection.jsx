@@ -131,7 +131,7 @@ const ContactSection = () => {
 					"Content-Type": "application/json",
 				},
 				body: JSON.stringify({
-					to: "krimobadworker@gmail.com",
+					to: "karim@badwork.fr",
 					name,
 					email,
 					subject,
