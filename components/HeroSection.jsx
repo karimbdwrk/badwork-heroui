@@ -6,6 +6,7 @@ import HeroBackground from "@/components/HeroBackground";
 
 export default function HeroSection() {
 	const [isMobile, setIsMobile] = useState(false);
+	const [svgWidth, setSvgWidth] = useState(900);
 
 	const heroRef = useRef(null);
 	const eyesRef = useRef(null);
@@ -17,13 +18,46 @@ export default function HeroSection() {
 	const current = useRef({ x: 0, y: 0 });
 	const idleTimeout = useRef(null);
 
+	const getSvgWidth = () => {
+		if (typeof window === "undefined") return 900;
+
+		const isTouch =
+			"ontouchstart" in window || navigator.maxTouchPoints > 0;
+
+		const ua = navigator.userAgent.toLowerCase();
+		const isPhone =
+			ua.includes("iphone") ||
+			(ua.includes("android") && ua.includes("mobile"));
+
+		// desktop ou tablette → largeur fixe
+		if (!isTouch || !isPhone) {
+			return 900;
+		}
+
+		// mobile (portrait ou paysage)
+		return Math.round(window.innerWidth * 0.8);
+	};
+
+	useEffect(() => {
+		const updateWidth = () => {
+			setSvgWidth(getSvgWidth());
+		};
+
+		updateWidth();
+
+		window.addEventListener("resize", updateWidth);
+		window.addEventListener("orientationchange", updateWidth);
+
+		return () => {
+			window.removeEventListener("resize", updateWidth);
+			window.removeEventListener("orientationchange", updateWidth);
+		};
+	}, []);
+
 	useEffect(() => {
 		setIsMobile(window.innerWidth < 450);
 	}, []);
 
-	/* ===============================
-	   SUIVI SOURIS / TOUCH
-	================================ */
 	useEffect(() => {
 		const hero = heroRef.current;
 		if (!hero) return;
@@ -152,7 +186,7 @@ export default function HeroSection() {
 
 				<svg
 					viewBox='0 0 1184.85 99.34'
-					width={isMobile ? 350 : 900}
+					width={svgWidth}
 					xmlns='http://www.w3.org/2000/svg'
 					role='img'
 					aria-label='BADWORK logo'>
