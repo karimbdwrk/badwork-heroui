@@ -1,34 +1,60 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+	isLikelySmartphone,
+	isTablet,
+	isLandscape,
+	isTouchDevice,
+} from "@/utils/device";
 
 export default function OrientationGuard() {
-	const [isLandscape, setIsLandscape] = useState(false);
+	const [block, setBlock] = useState(false);
 
 	useEffect(() => {
-		const checkOrientation = () => {
-			const isMobile = window.innerWidth < 768;
-			const landscape = window.innerWidth > window.innerHeight;
+		const check = () => {
+			// sécurité SSR
+			if (typeof window === "undefined") return;
 
-			setIsLandscape(isMobile && landscape);
+			const landscape = isLandscape();
+			const smartphone = isLikelySmartphone();
+			const tablet = isTablet();
+			const touch = isTouchDevice();
+
+			// LOGIQUE CLÉ
+			const shouldBlock = landscape && smartphone && touch && !tablet;
+
+			setBlock(shouldBlock);
 		};
 
-		checkOrientation();
-		window.addEventListener("resize", checkOrientation);
-		window.addEventListener("orientationchange", checkOrientation);
+		check();
+		window.addEventListener("resize", check);
+		window.addEventListener("orientationchange", check);
 
 		return () => {
-			window.removeEventListener("resize", checkOrientation);
-			window.removeEventListener("orientationchange", checkOrientation);
+			window.removeEventListener("resize", check);
+			window.removeEventListener("orientationchange", check);
 		};
 	}, []);
 
-	if (!isLandscape) return null;
+	if (!block) return null;
 
 	return (
-		<div className='rotate-device'>
+		<div
+			style={{
+				position: "fixed",
+				inset: 0,
+				background: "#000",
+				color: "#fff",
+				zIndex: 9999,
+				display: "flex",
+				alignItems: "center",
+				justifyContent: "center",
+				textAlign: "center",
+				userSelect: "none",
+			}}>
 			<div>
-				<p style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>
+				<p style={{ fontSize: "1.3rem", marginBottom: "0.8rem" }}>
 					Please rotate your device
 				</p>
 				<p style={{ opacity: 0.7 }}>
