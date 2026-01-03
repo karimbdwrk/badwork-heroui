@@ -18,6 +18,11 @@ export default function HeroSection() {
 	const current = useRef({ x: 0, y: 0 });
 	const idleTimeout = useRef(null);
 
+	useEffect(() => {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty("--vh", `${vh}px`);
+	}, []);
+
 	const getSvgWidth = () => {
 		if (typeof window === "undefined") return 900;
 
@@ -178,7 +183,10 @@ export default function HeroSection() {
 	return (
 		<div
 			ref={heroRef}
-			className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'>
+			className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'
+			style={{
+				height: "calc(var(--vh) * 100)",
+			}}>
 			<HeroBackground />
 
 			<div className='intro flex flex-col items-center justify-center z-10 text-center px-4'>
