@@ -74,7 +74,7 @@ export default function RootLayout({ children }) {
 					themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<OrientationGuard />
 					<div className='flex flex-col h-screen'>
-						{/* <Navbar /> */}
+						<Navbar />
 						<main>{children}</main>
 						<footer className='w-full flex flex-col items-center justify-center py-8'>
 							<Link
