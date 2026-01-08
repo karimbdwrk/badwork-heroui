@@ -37,33 +37,7 @@ const ContactSection = () => {
 				.required("Your message is required"),
 		}),
 		onSubmit: async (values, { resetForm }) => {
-			// L'objet 'values' contient name, email, subject, message
-			// qui correspondent aux colonnes de votre table.
-
 			try {
-				// 🚀 Utilisation de supabase-js pour l'insertion
-				// const { error } = await supabase
-				// 	.from("contact_messages") // Nom de la table
-				// 	.insert([
-				// 		// Supabase s'attend à un tableau d'objets pour `insert`
-				// 		{
-				// 			name: values.name,
-				// 			email: values.email,
-				// 			subject: values.subject,
-				// 			message: values.message,
-				// 		},
-				// 	]);
-
-				// // 💡 Gestion de l'erreur
-				// // Si `error` n'est pas null, nous levons une erreur pour être capturée par le `catch`.
-				// if (error) {
-				// 	console.error("Supabase Error:", error);
-				// 	// On peut jeter l'erreur pour la capturer dans le bloc catch
-				// 	throw new Error(
-				// 		error.message || "Supabase insertion failed."
-				// 	);
-				// }
-
 				sendEmail(
 					values.name,
 					values.email,
