@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@heroui/button";
+import { useTheme } from "next-themes";
 import HeroBackground from "@/components/HeroBackground";
 
 export default function HeroSection() {
 	const [isMobile, setIsMobile] = useState(false);
 	const [svgWidth, setSvgWidth] = useState(900);
+	const { theme } = useTheme();
 
 	const heroRef = useRef(null);
 	const eyesRef = useRef(null);
@@ -186,10 +188,14 @@ export default function HeroSection() {
 			className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'
 			style={{
 				height: "calc(var(--vh) * 100)",
+				backgroundColor: theme === "dark" ? "#000000" : "#FFFFFF",
+				position: "relative",
 			}}>
 			<HeroBackground />
 
-			<div className='intro flex flex-col items-center justify-center z-10 text-center px-4'>
+			<div
+				className='intro flex flex-col items-center justify-center z-10 text-center px-4'
+				style={{ position: "relative" }}>
 				<h1 className='sr-only'>BADWORK</h1>
 
 				<svg
@@ -198,7 +204,7 @@ export default function HeroSection() {
 					xmlns='http://www.w3.org/2000/svg'
 					role='img'
 					aria-label='BADWORK logo'>
-					<g fill='#fff'>
+					<g fill={theme === "dark" ? "#fff" : "#303030"}>
 						{/* BADW */}
 						<path d='M0,99.34V.08c19.36,0,38.72,0,58.08,0h3.77c8.11,0,16.23,0,24.34,0,5.05-.24,21.4-.27,33.82,5.2,7.87,3.47,11.81,9.43,11.81,17.88,0,6.4-2.07,11.49-6.2,15.28-4.14,3.78-10.56,6.25-19.28,7.4v.27c9.43,1.25,16.83,4.03,22.21,8.34,5.38,4.32,8.07,9.94,8.07,16.88,0,10.94-4.67,18.34-14.01,22.21-9.34,3.87-21.53,5.8-36.56,5.8H0ZM72.45,40.51c3.02,0,5.27-.47,6.74-1.4,1.47-.93,2.2-2.42,2.2-4.47,0-2.31-.69-4-2.07-5.07-1.38-1.07-3.49-1.6-6.34-1.6-.42,0-12.52,0-12.64,0-.04,0-3.3,0-3.34,0h-2.43v12.54s2.86,0,2.89,0h2.88s12.05,0,12.11,0ZM72.71,71.46c3.29,0,5.71-.56,7.27-1.67,1.56-1.11,2.33-3,2.33-5.67,0-2.31-.85-4-2.53-5.07-1.69-1.07-4.23-1.6-7.6-1.6-.37,0-11.41,0-11.54,0-.04,0-3.45,0-3.49,0h-2.59v14.01s2.28,0,2.29,0c.02,0,3.46,0,3.48,0,.08,0,12.11,0,12.38,0Z' />
 						<path d='M298.19,99.34h-60.17l-4-14.94h-31.75l-3.87,14.94h-60.04L176.38.08h82.59l39.23,99.27ZM216.94,28.63l-7.74,29.62h17.88l-7.87-29.62-.8-4.14h-.67l-.8,4.14Z' />
@@ -228,7 +234,12 @@ export default function HeroSection() {
 				</p>
 
 				<Button
-					className='mt-12 bg-white text-black hover:bg-gray-200 pl-12 pr-12 select-none'
+					className='mt-12 pl-12 pr-12 select-none'
+					style={{
+						backgroundColor:
+							theme === "light" ? "#303030" : "#FFFFFF",
+						color: theme === "light" ? "#FFFFFF" : "#000000",
+					}}
 					onPress={() => scrollToSection("contact")}>
 					CONTACT US
 				</Button>
