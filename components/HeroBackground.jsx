@@ -12,7 +12,9 @@ export default function HeroBackground() {
 				width: "100vw",
 				height: "100vh",
 				position: "absolute",
-				zIndex: -1,
+				zIndex: 0,
+				top: 0,
+				left: 0,
 			}}>
 			<Dither
 				waveColor={[0.5, 0.5, 0.5]}
