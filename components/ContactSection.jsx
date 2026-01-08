@@ -7,6 +7,7 @@ import { Input, Textarea } from "@heroui/input";
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
 import { addToast } from "@heroui/toast";
+import { useTheme } from "next-themes";
 
 // 💡 Importez votre client Supabase
 // Ajustez le chemin si nécessaire.
@@ -14,6 +15,7 @@ import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
 	const [isSend, setIsSend] = useState(false);
+	const { theme } = useTheme();
 
 	const formik = useFormik({
 		initialValues: {
@@ -132,10 +134,21 @@ const ContactSection = () => {
 			{!isSend ? (
 				<div className='w-full flex flex-col items-center'>
 					<div className='text-center mb-6'>
-						<h2 className='text-3xl font-bold'>
+						<h2
+							className='text-3xl font-bold'
+							style={{
+								color:
+									theme === "light" ? "#303030" : "#FFFFFF",
+							}}>
 							Have a project in mind?
 						</h2>
-						<p>Every great project begins with a simple message.</p>
+						<p
+							style={{
+								color:
+									theme === "light" ? "#303030" : "#FFFFFF",
+							}}>
+							Every great project begins with a simple message.
+						</p>
 					</div>
 					<form
 						onSubmit={formik.handleSubmit}
@@ -202,7 +215,12 @@ const ContactSection = () => {
 						/>
 						<Button
 							type='submit'
-							className='bg-white text-black hover:bg-gray-200'
+							style={{
+								backgroundColor:
+									theme === "light" ? "#303030" : "#FFFFFF",
+								color:
+									theme === "light" ? "#FFFFFF" : "#000000",
+							}}
 							isDisabled={formik.isSubmitting}>
 							{formik.isSubmitting ? "Sending..." : "Send"}
 						</Button>
@@ -210,10 +228,18 @@ const ContactSection = () => {
 				</div>
 			) : (
 				<div className='text-center'>
-					<h2 className='text-2xl font-bold mb-4'>
+					<h2
+						className='text-2xl font-bold mb-4'
+						style={{
+							color: theme === "light" ? "#303030" : "#FFFFFF",
+						}}>
 						Thank you for reaching out!
 					</h2>
-					<p className='mb-4'>
+					<p
+						className='mb-4'
+						style={{
+							color: theme === "light" ? "#303030" : "#FFFFFF",
+						}}>
 						We have received your message and will get back to you
 						shortly.
 					</p>
