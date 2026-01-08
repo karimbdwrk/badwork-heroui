@@ -75,7 +75,6 @@ export default function RootLayout({ children }) {
 					themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<OrientationGuard />
 					<div className='flex flex-col h-screen'>
-						{/* <Navbar /> */}
 						<div
 							style={{
 								position: "fixed",
