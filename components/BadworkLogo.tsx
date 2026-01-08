@@ -1,3 +1,7 @@
+"use client";
+
+import { useTheme } from "next-themes";
+
 type BadworkLogoProps = {
     width?: number | string;
     className?: string;
@@ -7,6 +11,9 @@ export default function BadworkLogo({
     width = 900,
     className = "",
 }: BadworkLogoProps) {
+    const { theme } = useTheme();
+    const fillColor = theme === "dark" ? "#FFF" : "#303030";
+
     return (
         <svg
             viewBox="0 0 1181.85 99.34"
@@ -16,7 +23,7 @@ export default function BadworkLogo({
             aria-label="BADWORK logo"
             className={className}
         >
-            <g fill="currentColor">
+            <g fill={fillColor}>
                 <path d="M0,99.34V.08h85.19c21.4,0,45.63,4.93,45.63,23.08,0,10.24-6.21,17.45-25.48,20.2v.27c19.88,2.13,30.28,10.39,30.28,24.77,0,19.6-16.54,30.94-51.39,30.94H0ZM54.6,40.51h18.41c5.49,0,8.94-2.13,8.94-5.87,0-3.73-2.88-5.6-8.41-5.6H54.6ZM54.6,71.46h18.63c6.13,0,9.6-2.13,9.6-6.67,0-4.27-3.2-6.4-9.6-6.4H54.6Z"/>
                 <path d="M298.19,99.34h-60.17l-4-14.94h-31.75l-3.87,14.94h-60.04L176.38.08h82.59ZM216.94,28.63l-7.74,29.62h17.88Z"/>
                 <path d="M306.87,99.34V.08h77.52c43.63,0,66.05,18.68,66.05,49.76s-22.16,49.5-66.05,49.5ZM363.43,67.99h11.34c12.01,0,18.28-6.4,18.28-18.14,0-11.74-6.27-18.41-18.28-18.41h-11.34Z"/>
