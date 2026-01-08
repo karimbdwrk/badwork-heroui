@@ -156,70 +156,84 @@ const ContactSection = () => {
 			className='contact-section relative min-h-screen w-screen overflow-hidden flex flex-col items-center justify-center p-5'
 			id='contact'>
 			{!isSend ? (
-				<form
-					onSubmit={formik.handleSubmit}
-					className='contact-form flex flex-col w-full flex-wrap md:flex-nowrap gap-4 max-w-xl'>
-					<Input
-						name='name'
-						label='Name'
-						isRequired
-						value={formik.values.name}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						isInvalid={formik.touched.name && !!formik.errors.name}
-						errorMessage={formik.touched.name && formik.errors.name}
-					/>
-					<Input
-						name='email'
-						type='email'
-						label='Email'
-						isRequired
-						value={formik.values.email}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						isInvalid={
-							formik.touched.email && !!formik.errors.email
-						}
-						errorMessage={
-							formik.touched.email && formik.errors.email
-						}
-					/>
-					<Input
-						name='subject'
-						label='Subject'
-						isRequired
-						value={formik.values.subject}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						isInvalid={
-							formik.touched.subject && !!formik.errors.subject
-						}
-						errorMessage={
-							formik.touched.subject && formik.errors.subject
-						}
-					/>
-					<Textarea
-						name='message'
-						label='Message'
-						isRequired
-						minRows={4}
-						value={formik.values.message}
-						onChange={formik.handleChange}
-						onBlur={formik.handleBlur}
-						isInvalid={
-							formik.touched.message && !!formik.errors.message
-						}
-						errorMessage={
-							formik.touched.message && formik.errors.message
-						}
-					/>
-					<Button
-						type='submit'
-						className='bg-white text-black hover:bg-gray-200'
-						isDisabled={formik.isSubmitting}>
-						{formik.isSubmitting ? "Sending..." : "Send"}
-					</Button>
-				</form>
+				<div className='w-full flex flex-col items-center'>
+					<div className='text-center mb-6'>
+						<h2 className='text-3xl font-bold'>
+							Have a project in mind?
+						</h2>
+						<p>Every great project begins with a simple message.</p>
+					</div>
+					<form
+						onSubmit={formik.handleSubmit}
+						className='contact-form flex flex-col w-full flex-wrap md:flex-nowrap gap-4 max-w-xl'>
+						<Input
+							name='name'
+							label='Name'
+							isRequired
+							value={formik.values.name}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							isInvalid={
+								formik.touched.name && !!formik.errors.name
+							}
+							errorMessage={
+								formik.touched.name && formik.errors.name
+							}
+						/>
+						<Input
+							name='email'
+							type='email'
+							label='Email'
+							isRequired
+							value={formik.values.email}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							isInvalid={
+								formik.touched.email && !!formik.errors.email
+							}
+							errorMessage={
+								formik.touched.email && formik.errors.email
+							}
+						/>
+						<Input
+							name='subject'
+							label='Subject'
+							isRequired
+							value={formik.values.subject}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							isInvalid={
+								formik.touched.subject &&
+								!!formik.errors.subject
+							}
+							errorMessage={
+								formik.touched.subject && formik.errors.subject
+							}
+						/>
+						<Textarea
+							name='message'
+							label='Message'
+							isRequired
+							minRows={4}
+							value={formik.values.message}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							isInvalid={
+								formik.touched.message &&
+								!!formik.errors.message
+							}
+							errorMessage={
+								formik.touched.message && formik.errors.message
+							}
+						/>
+						<Button
+							type='submit'
+							className='bg-white text-black hover:bg-gray-200'
+							isDisabled={formik.isSubmitting}>
+							{formik.isSubmitting ? "Sending..." : "Send"}
+						</Button>
+					</form>
+				</div>
 			) : (
 				<div className='text-center'>
 					<h2 className='text-2xl font-bold mb-4'>
