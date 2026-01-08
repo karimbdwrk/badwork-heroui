@@ -1,3 +1,5 @@
+'use client'
+
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -14,6 +16,8 @@ import { Input } from "@heroui/input";
 import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
 import clsx from "clsx";
+import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "./theme-switch";
@@ -28,6 +32,29 @@ import {
 import BadworkLogo from "./BadworkLogo";
 
 export const Navbar = () => {
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const [showLogo, setShowLogo] = useState(false);
+
+  useEffect(() => {
+    if (!isHomePage) {
+      setShowLogo(true);
+      return;
+    }
+
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const viewportHeight = window.innerHeight;
+      const threshold = viewportHeight * 0.5; // 50vh
+
+      setShowLogo(scrollPosition > threshold);
+    };
+
+    handleScroll(); // Vérifier la position initiale
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHomePage]);
   // const searchInput = (
   //   <Input
   //     aria-label="Search"
@@ -56,7 +83,14 @@ export const Navbar = () => {
           <NextLink className="flex justify-start items-center gap-1" href="/">
             {/* <Logo />
             <p className="font-bold text-inherit">ACME</p> */}
-            <BadworkLogo width={120} />
+            <div
+              className={clsx(
+                "transition-opacity duration-300",
+                showLogo ? "opacity-100" : "opacity-0"
+              )}
+            >
+              <BadworkLogo width={120} />
+            </div>
           </NextLink>
         </NavbarBrand>
         {/* <ul className="hidden lg:flex gap-4 justify-start ml-2">
