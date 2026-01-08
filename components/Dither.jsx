@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
 import { Effect } from "postprocessing";
 import * as THREE from "three";
+import { useTheme } from "next-themes";
 
 import "./Dither.css";
 
@@ -27,6 +28,7 @@ uniform float waveSpeed;
 uniform float waveFrequency;
 uniform float waveAmplitude;
 uniform vec3 waveColor;
+uniform vec3 backgroundColor;
 uniform vec2 mousePos;
 uniform int enableMouseInteraction;
 uniform float mouseRadius;
@@ -94,7 +96,7 @@ void main() {
     float effect = 1.0 - smoothstep(0.0, mouseRadius, dist);
     f -= 0.5 * effect;
   }
-  vec3 col = mix(vec3(0.0), waveColor, f);
+  vec3 col = mix(backgroundColor, waveColor, f);
   gl_FragColor = vec4(col, 1.0);
 }
 `;
@@ -180,6 +182,10 @@ function DitheredWaves({
 	const mesh = useRef(null);
 	const mouseRef = useRef(new THREE.Vector2());
 	const { viewport, size, gl } = useThree();
+	const { theme } = useTheme();
+
+	// Définir la couleur de fond en fonction du thème
+	const backgroundColor = theme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
 
 	const waveUniformsRef = useRef({
 		time: new THREE.Uniform(0),
@@ -188,6 +194,7 @@ function DitheredWaves({
 		waveFrequency: new THREE.Uniform(waveFrequency),
 		waveAmplitude: new THREE.Uniform(waveAmplitude),
 		waveColor: new THREE.Uniform(new THREE.Color(...waveColor)),
+		backgroundColor: new THREE.Uniform(new THREE.Color(...backgroundColor)),
 		mousePos: new THREE.Uniform(new THREE.Vector2(0, 0)),
 		enableMouseInteraction: new THREE.Uniform(
 			enableMouseInteraction ? 1 : 0
@@ -208,6 +215,12 @@ function DitheredWaves({
 			res.set(w, h);
 		}
 	}, [size, gl]);
+
+	// Mettre à jour la couleur de fond quand le thème change
+	useEffect(() => {
+		const bgColor = theme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
+		waveUniformsRef.current.backgroundColor.value.set(...bgColor);
+	}, [theme]);
 
 	const prevColor = useRef([...waveColor]);
 	useFrame(({ clock }) => {
@@ -289,7 +302,12 @@ export default function Dither({
 			className='dither-container'
 			camera={{ position: [0, 0, 6] }}
 			dpr={1}
-			gl={{ antialias: true, preserveDrawingBuffer: true }}>
+			gl={{ 
+				antialias: true, 
+				preserveDrawingBuffer: true,
+				alpha: true
+			}}
+			style={{ background: 'transparent' }}>
 			<DitheredWaves
 				waveSpeed={waveSpeed}
 				waveFrequency={waveFrequency}
