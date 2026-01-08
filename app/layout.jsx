@@ -11,6 +11,7 @@ import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import OrientationGuard from "@/components/OrientationGuard";
+import Footer from "@/components/Footer";
 
 import { Roboto_Mono } from "next/font/google";
 
@@ -85,17 +86,7 @@ export default function RootLayout({ children }) {
 							<Navbar />
 						</div>
 						<main>{children}</main>
-						<footer className='w-full flex flex-col items-center justify-center py-8'>
-							<Link
-								href='/legal'
-								className='text-white hover:underline underline-offset-4 text-sm select-none'>
-								Legal notice
-							</Link>
-							<p className='text-xs text-gray-600 mt-2 select-none'>
-								©2026 - badwork | digital - all rights
-								reserved.
-							</p>
-						</footer>
+						<Footer />
 					</div>
 				</Providers>
 			</body>
