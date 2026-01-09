@@ -23,7 +23,11 @@ const ContactSection = () => {
 	}, []);
 
 	// Utiliser le thème actuel ou le thème système en fallback
-	const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
+	const currentTheme = mounted
+		? theme === "system"
+			? systemTheme
+			: theme
+		: "dark";
 
 	const formik = useFormik({
 		initialValues: {
@@ -143,7 +147,7 @@ const ContactSection = () => {
 				<div className='w-full flex flex-col items-center'>
 					<div className='text-center mb-6'>
 						<h2
-							className='text-3xl font-bold'
+							className='text-2xl sm:text-3xl font-bold'
 							style={{
 								color:
 									theme === "light" ? "#303030" : "#FFFFFF",
@@ -151,6 +155,7 @@ const ContactSection = () => {
 							Have a project in mind?
 						</h2>
 						<p
+							className='text-xs sm:text-lg'
 							style={{
 								color:
 									theme === "light" ? "#303030" : "#FFFFFF",
@@ -225,9 +230,13 @@ const ContactSection = () => {
 							type='submit'
 							style={{
 								backgroundColor:
-									currentTheme === "light" ? "#303030" : "#FFFFFF",
+									currentTheme === "light"
+										? "#303030"
+										: "#FFFFFF",
 								color:
-									currentTheme === "light" ? "#FFFFFF" : "#000000",
+									currentTheme === "light"
+										? "#FFFFFF"
+										: "#000000",
 							}}
 							isDisabled={formik.isSubmitting}>
 							{formik.isSubmitting ? "Sending..." : "Send"}
