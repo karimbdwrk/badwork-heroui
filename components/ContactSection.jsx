@@ -29,12 +29,31 @@ const ContactSection = () => {
 			: theme
 		: "dark";
 
+	// Fonction pour capitaliser la première lettre de chaque mot
+	const capitalizeWords = (str) => {
+		return str.replace(/\b\w/g, (char) => char.toUpperCase());
+	};
+
+	// Fonction pour valider et nettoyer l'email (uniquement caractères autorisés)
+	const sanitizeEmail = (str) => {
+		// Autorise uniquement : lettres, chiffres, points, tirets, underscores, arobase
+		// Regex stricte pour adresses email valides
+		return str
+			.toLowerCase()
+			.replace(/[^a-z0-9@._\-+]/g, ''); // Supprime tous les caractères non autorisés
+	};
+
+	// Fonction pour capitaliser après les points
+	const capitalizeAfterPeriod = (str) => {
+		return str.replace(/(^\w|\.\s+\w)/g, (char) => char.toUpperCase());
+	};
+
 	const formik = useFormik({
 		initialValues: {
 			name: "",
 			email: "",
 			subject: "",
-			description: "",
+			message: "",
 		},
 		validationSchema: Yup.object({
 			name: Yup.string()
@@ -96,6 +115,7 @@ const ContactSection = () => {
 					email,
 					subject,
 					message,
+					isOwner: false, // Email de confirmation au client
 				}),
 			});
 
@@ -124,6 +144,7 @@ const ContactSection = () => {
 					email,
 					subject,
 					message,
+					isOwner: true, // Email au propriétaire du site
 				}),
 			});
 
@@ -137,6 +158,27 @@ const ContactSection = () => {
 		} catch (err) {
 			console.error("sendEmail failed:", err.message);
 		}
+	};
+
+	// Gestionnaires de changement personnalisés
+	const handleNameChange = (e) => {
+		const formatted = capitalizeWords(e.target.value);
+		formik.setFieldValue("name", formatted);
+	};
+
+	const handleEmailChange = (e) => {
+		const formatted = sanitizeEmail(e.target.value);
+		formik.setFieldValue("email", formatted);
+	};
+
+	const handleSubjectChange = (e) => {
+		const formatted = capitalizeAfterPeriod(e.target.value);
+		formik.setFieldValue("subject", formatted);
+	};
+
+	const handleMessageChange = (e) => {
+		const formatted = capitalizeAfterPeriod(e.target.value);
+		formik.setFieldValue("message", formatted);
 	};
 
 	return (
@@ -171,7 +213,7 @@ const ContactSection = () => {
 							label='Name'
 							isRequired
 							value={formik.values.name}
-							onChange={formik.handleChange}
+							onChange={handleNameChange}
 							onBlur={formik.handleBlur}
 							isInvalid={
 								formik.touched.name && !!formik.errors.name
@@ -186,7 +228,7 @@ const ContactSection = () => {
 							label='Email'
 							isRequired
 							value={formik.values.email}
-							onChange={formik.handleChange}
+							onChange={handleEmailChange}
 							onBlur={formik.handleBlur}
 							isInvalid={
 								formik.touched.email && !!formik.errors.email
@@ -200,7 +242,7 @@ const ContactSection = () => {
 							label='Subject'
 							isRequired
 							value={formik.values.subject}
-							onChange={formik.handleChange}
+							onChange={handleSubjectChange}
 							onBlur={formik.handleBlur}
 							isInvalid={
 								formik.touched.subject &&
@@ -216,7 +258,7 @@ const ContactSection = () => {
 							isRequired
 							minRows={4}
 							value={formik.values.message}
-							onChange={formik.handleChange}
+							onChange={handleMessageChange}
 							onBlur={formik.handleBlur}
 							isInvalid={
 								formik.touched.message &&
