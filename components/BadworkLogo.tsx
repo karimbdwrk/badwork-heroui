@@ -1,6 +1,7 @@
 "use client";
 
 import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 type BadworkLogoProps = {
     width?: number | string;
@@ -11,8 +12,16 @@ export default function BadworkLogo({
     width = 900,
     className = "",
 }: BadworkLogoProps) {
-    const { theme } = useTheme();
-    const fillColor = theme === "dark" ? "#FFF" : "#303030";
+    const { theme, systemTheme } = useTheme();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Utiliser le thème actuel ou le thème système en fallback
+    const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
+    const fillColor = currentTheme === "dark" ? "#FFF" : "#303030";
 
     return (
         <svg

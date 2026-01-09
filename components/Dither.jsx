@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, forwardRef } from "react";
+import { useRef, useEffect, forwardRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
 import { Effect } from "postprocessing";
@@ -182,10 +182,18 @@ function DitheredWaves({
 	const mesh = useRef(null);
 	const mouseRef = useRef(new THREE.Vector2());
 	const { viewport, size, gl } = useThree();
-	const { theme } = useTheme();
+	const { theme, systemTheme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	// Utiliser le thème actuel ou le thème système en fallback
+	const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
 
 	// Définir la couleur de fond en fonction du thème
-	const backgroundColor = theme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
+	const backgroundColor = currentTheme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
 
 	const waveUniformsRef = useRef({
 		time: new THREE.Uniform(0),
@@ -218,9 +226,9 @@ function DitheredWaves({
 
 	// Mettre à jour la couleur de fond quand le thème change
 	useEffect(() => {
-		const bgColor = theme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
+		const bgColor = currentTheme === "dark" ? [0.0, 0.0, 0.0] : [1.0, 1.0, 1.0];
 		waveUniformsRef.current.backgroundColor.value.set(...bgColor);
-	}, [theme]);
+	}, [currentTheme]);
 
 	const prevColor = useRef([...waveColor]);
 	useFrame(({ clock }) => {
