@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { Input, Textarea } from "@heroui/input";
 import { Link } from "@heroui/link";
 import { Button } from "@heroui/button";
-import { addToast } from "@heroui/toast";
+import { addToast } from "@/utils/toast";
 import { useTheme } from "next-themes";
 
 // 💡 Importez votre client Supabase
@@ -38,9 +38,7 @@ const ContactSection = () => {
 	const sanitizeEmail = (str) => {
 		// Autorise uniquement : lettres, chiffres, points, tirets, underscores, arobase
 		// Regex stricte pour adresses email valides
-		return str
-			.toLowerCase()
-			.replace(/[^a-z0-9@._\-+]/g, ''); // Supprime tous les caractères non autorisés
+		return str.toLowerCase().replace(/[^a-z0-9@._\-+]/g, ""); // Supprime tous les caractères non autorisés
 	};
 
 	// Fonction pour capitaliser après les points
@@ -284,6 +282,27 @@ const ContactSection = () => {
 							{formik.isSubmitting ? "Sending..." : "Send"}
 						</Button>
 					</form>
+					<Button
+						style={{
+							backgroundColor:
+								currentTheme === "light"
+									? "#303030"
+									: "#FFFFFF",
+							color:
+								currentTheme === "light"
+									? "#FFFFFF"
+									: "#000000",
+						}}
+						onPress={() => {
+							addToast({
+								title: "This is a test toast",
+								description:
+									"If you see this, the toast system is working!",
+							});
+						}}
+						className='mt-4'>
+						test toast
+					</Button>
 				</div>
 			) : (
 				<div className='text-center'>
