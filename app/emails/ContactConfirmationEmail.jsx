@@ -93,7 +93,7 @@ const styles = {
 	body: {
 		backgroundColor: "#0a0a0a",
 		fontFamily:
-			"-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+			"'Roboto Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
 	},
 	container: {
 		maxWidth: "600px",
