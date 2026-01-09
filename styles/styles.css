@@ -9,6 +9,31 @@
   display: none !important;
 }
 
+/* Toast au-dessus du header (navbar z-index: 1000) */
+/* Cibler tous les containers de toast possibles */
+[data-slot="toast-container"],
+[data-slot="toast"],
+.heroui-toast-container,
+.heroui-toast,
+[role="region"][aria-live="polite"],
+div[data-slot="base"][style*="position: fixed"],
+div[style*="position: fixed"][style*="pointer-events: none"],
+div[style*="position: fixed"][style*="top: 0"] {
+  z-index: 10000 !important;
+}
+
+/* Forcer z-index sur tous les éléments enfants du toast */
+[data-slot="toast"] *,
+[data-slot="toast-container"] * {
+  position: relative;
+  z-index: 10001 !important;
+}
+
+/* Tous les éléments fixed SAUF la navbar doivent être au-dessus */
+body > div[style*="position: fixed"]:not([style*="z-index: 1000"]) {
+  z-index: 10000 !important;
+}
+
 .rotate-device {
   position: fixed;
   inset: 0;
