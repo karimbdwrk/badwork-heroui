@@ -15,7 +15,15 @@ import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
 	const [isSend, setIsSend] = useState(false);
-	const { theme } = useTheme();
+	const [mounted, setMounted] = useState(false);
+	const { theme, systemTheme } = useTheme();
+
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	// Utiliser le thème actuel ou le thème système en fallback
+	const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
 
 	const formik = useFormik({
 		initialValues: {
@@ -217,9 +225,9 @@ const ContactSection = () => {
 							type='submit'
 							style={{
 								backgroundColor:
-									theme === "light" ? "#303030" : "#FFFFFF",
+									currentTheme === "light" ? "#303030" : "#FFFFFF",
 								color:
-									theme === "light" ? "#FFFFFF" : "#000000",
+									currentTheme === "light" ? "#FFFFFF" : "#000000",
 							}}
 							isDisabled={formik.isSubmitting}>
 							{formik.isSubmitting ? "Sending..." : "Send"}
