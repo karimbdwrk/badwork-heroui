@@ -3,6 +3,7 @@ import "@/styles/styles.css";
 import { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Link } from "@heroui/link";
+import { ToastProvider } from "@heroui/toast";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
@@ -46,6 +47,17 @@ export default function RootLayout({ children }) {
 			lang='en'
 			className={robotoMono.variable}>
 			<head>
+				<style
+					dangerouslySetInnerHTML={{
+						__html: `
+						[data-slot="toast-container"],
+						[role="region"][aria-live="polite"],
+						div[style*="position: fixed"][style*="top"] {
+							z-index: 10000 !important;
+						}
+					`,
+					}}
+				/>
 				<Script
 					id='gtm'
 					strategy='afterInteractive'
@@ -80,10 +92,11 @@ export default function RootLayout({ children }) {
 								position: "fixed",
 								top: 0,
 								width: "100%",
-								zIndex: 1000,
+								zIndex: 10,
 							}}>
 							<Navbar />
 						</div>
+						<ToastProvider placement='bottom-center' />
 						<main>{children}</main>
 						<Footer />
 					</div>
