@@ -282,27 +282,6 @@ const ContactSection = () => {
 							{formik.isSubmitting ? "Sending..." : "Send"}
 						</Button>
 					</form>
-					<Button
-						style={{
-							backgroundColor:
-								currentTheme === "light"
-									? "#303030"
-									: "#FFFFFF",
-							color:
-								currentTheme === "light"
-									? "#FFFFFF"
-									: "#000000",
-						}}
-						onPress={() => {
-							addToast({
-								title: "This is a test toast",
-								description:
-									"If you see this, the toast system is working!",
-							});
-						}}
-						className='mt-4'>
-						test toast
-					</Button>
 				</div>
 			) : (
 				<div className='text-center'>
