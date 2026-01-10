@@ -187,7 +187,7 @@ const ContactSection = () => {
 				<div className='w-full flex flex-col items-center'>
 					<div className='text-center mb-6'>
 						<h2
-							className='text-2xl sm:text-3xl font-bold'
+							className='text-2xl sm:text-3xl font-bold select-none'
 							style={{
 								color:
 									theme === "light" ? "#303030" : "#FFFFFF",
@@ -195,7 +195,7 @@ const ContactSection = () => {
 							Have a project in mind?
 						</h2>
 						<p
-							className='text-xs sm:text-lg'
+							className='text-xs sm:text-lg select-none'
 							style={{
 								color:
 									theme === "light" ? "#303030" : "#FFFFFF",
@@ -286,14 +286,14 @@ const ContactSection = () => {
 			) : (
 				<div className='text-center'>
 					<h2
-						className='text-2xl font-bold mb-4'
+						className='text-2xl font-bold mb-4 select-none'
 						style={{
 							color: theme === "light" ? "#303030" : "#FFFFFF",
 						}}>
 						Thank you for reaching out!
 					</h2>
 					<p
-						className='mb-4'
+						className='mb-4 select-none'
 						style={{
 							color: theme === "light" ? "#303030" : "#FFFFFF",
 						}}>
