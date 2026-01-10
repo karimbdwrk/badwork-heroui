@@ -20,7 +20,11 @@ export default function HeroSection() {
 	}, []);
 
 	// Utiliser le thème actuel ou le thème système en fallback
-	const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
+	const currentTheme = mounted
+		? theme === "system"
+			? systemTheme
+			: theme
+		: "dark";
 
 	// position cible (curseur)
 	const target = useRef({ x: 0, y: 0 });
@@ -82,6 +86,13 @@ export default function HeroSection() {
 			target.current.x = (clientX - rect.left) / rect.width - 0.5;
 			target.current.y = (clientY - rect.top) / rect.height - 0.5;
 
+			// console.log('Position:', {
+			// 	x: target.current.x,
+			// 	y: target.current.y,
+			// 	clientX,
+			// 	clientY
+			// });
+
 			resetIdle();
 		};
 
@@ -111,8 +122,15 @@ export default function HeroSection() {
 	   INERTIE + LIMITE ELLIPTIQUE
 	================================ */
 	useEffect(() => {
+		if (!mounted) return;
+
 		const eyes = eyesRef.current;
-		if (!eyes) return;
+		if (!eyes) {
+			console.log("Eyes ref not found");
+			return;
+		}
+
+		console.log("Starting eye animation");
 
 		const MAX_X = 14;
 		const MAX_Y = 10;
@@ -136,16 +154,25 @@ export default function HeroSection() {
 				current.current.y /= len;
 			}
 
-			eyes.style.transform = `translate(${
-				current.current.x * MAX_X * 2
-			}px, ${current.current.y * MAX_Y * 2}px)`;
+			const transformX = current.current.x * MAX_X * 2;
+			const transformY = current.current.y * MAX_Y * 2;
+
+			// console.log("Eyes transform:", {
+			// 	currentX: current.current.x,
+			// 	currentY: current.current.y,
+			// 	transformX,
+			// 	transformY,
+			// 	transform: `translate(${transformX}px, ${transformY}px)`,
+			// });
+
+			eyes.style.transform = `translate(${transformX}px, ${transformY}px)`;
 
 			raf = requestAnimationFrame(loop);
 		};
 
 		loop();
 		return () => cancelAnimationFrame(raf);
-	}, []);
+	}, [mounted]);
 
 	/* ===============================
 	   RETOUR AU CENTRE (IDLE)
@@ -196,7 +223,8 @@ export default function HeroSection() {
 			className='hero-container h-screen w-screen overflow-hidden flex flex-col items-center justify-center'
 			style={{
 				height: "calc(var(--vh) * 100)",
-				backgroundColor: currentTheme === "dark" ? "#000000" : "#FFFFFF",
+				backgroundColor:
+					currentTheme === "dark" ? "#000000" : "#FFFFFF",
 				position: "relative",
 			}}>
 			<HeroBackground />
