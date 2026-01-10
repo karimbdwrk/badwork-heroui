@@ -86,13 +86,6 @@ export default function HeroSection() {
 			target.current.x = (clientX - rect.left) / rect.width - 0.5;
 			target.current.y = (clientY - rect.top) / rect.height - 0.5;
 
-			// console.log('Position:', {
-			// 	x: target.current.x,
-			// 	y: target.current.y,
-			// 	clientX,
-			// 	clientY
-			// });
-
 			resetIdle();
 		};
 
@@ -156,14 +149,6 @@ export default function HeroSection() {
 
 			const transformX = current.current.x * MAX_X * 2;
 			const transformY = current.current.y * MAX_Y * 2;
-
-			// console.log("Eyes transform:", {
-			// 	currentX: current.current.x,
-			// 	currentY: current.current.y,
-			// 	transformX,
-			// 	transformY,
-			// 	transform: `translate(${transformX}px, ${transformY}px)`,
-			// });
 
 			eyes.style.transform = `translate(${transformX}px, ${transformY}px)`;
 
