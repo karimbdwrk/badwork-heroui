@@ -10,12 +10,13 @@ export default function HeroBackground() {
 		<div
 			style={{
 				width: "100vw",
-				height: "100vh",
+				height: "calc(var(--vh, 1vh) * 100)",
 				position: "absolute",
 				zIndex: 0,
 				top: 0,
 				left: 0,
 			}}>
+			'
 			<Dither
 				waveColor={[0.5, 0.5, 0.5]}
 				disableAnimation={false}
