@@ -16,7 +16,6 @@ export default function HeroBackground() {
 				top: 0,
 				left: 0,
 			}}>
-			'
 			<Dither
 				waveColor={[0.5, 0.5, 0.5]}
 				disableAnimation={false}
