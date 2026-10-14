@@ -1,20 +1,16 @@
 import "@/styles/globals.css";
 import "@/styles/styles.css";
-import { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Link } from "@heroui/link";
 import { ToastProvider } from "@heroui/toast";
 import clsx from "clsx";
 
 import { Providers } from "./providers";
+import { geistSans, geistMono } from "./fonts";
 
 import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
 import OrientationGuard from "@/components/OrientationGuard";
 import Footer from "@/components/Footer";
-
-import { Roboto_Mono } from "next/font/google";
 
 export const metadata = {
 	title: {
@@ -29,13 +25,19 @@ export const metadata = {
 	alternates: {
 		canonical: "/",
 	},
+	openGraph: {
+		type: "website",
+		url: "https://www.badwork.io",
+		siteName: siteConfig.name,
+		title: siteConfig.name,
+		description: siteConfig.description,
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: siteConfig.name,
+		description: siteConfig.description,
+	},
 };
-
-const robotoMono = Roboto_Mono({
-	subsets: ["latin"],
-	weight: ["400", "500", "700"],
-	variable: "--font-roboto-mono",
-});
 
 export const viewport = {
 	width: "device-width",
@@ -43,8 +45,8 @@ export const viewport = {
 	maximumScale: 1,
 	userScalable: false,
 	themeColor: [
-		{ media: "(prefers-color-scheme: light)", color: "white" },
-		{ media: "(prefers-color-scheme: dark)", color: "black" },
+		{ media: "(prefers-color-scheme: light)", color: "#f4f3f0" },
+		{ media: "(prefers-color-scheme: dark)", color: "#0b0b0b" },
 	],
 };
 
@@ -53,19 +55,8 @@ export default function RootLayout({ children }) {
 		<html
 			suppressHydrationWarning
 			lang='en'
-			className={robotoMono.variable}>
+			className={clsx(geistSans.variable, geistMono.variable)}>
 			<head>
-				<style
-					dangerouslySetInnerHTML={{
-						__html: `
-						[data-slot="toast-container"],
-						[role="region"][aria-live="polite"],
-						div[style*="position: fixed"][style*="top"] {
-							z-index: 10000 !important;
-						}
-					`,
-					}}
-				/>
 				<Script
 					id='gtm'
 					strategy='afterInteractive'
@@ -80,7 +71,7 @@ export default function RootLayout({ children }) {
 					}}
 				/>
 			</head>
-			<body className={robotoMono.className}>
+			<body className='font-sans bg-background text-foreground'>
 				<noscript>
 					<iframe
 						src='https://www.googletagmanager.com/ns.html?id=GTM-TZNCBWL2'
@@ -93,21 +84,21 @@ export default function RootLayout({ children }) {
 				</noscript>
 				<Providers
 					themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+					<a href='#main' className='bw-skip-link'>
+						Skip to content
+					</a>
 					<OrientationGuard />
-					<div className='flex flex-col h-screen'>
-						<div
-							style={{
-								position: "fixed",
-								top: 0,
-								width: "100%",
-								zIndex: 10,
-							}}>
+					<div className='flex flex-col min-h-dvh'>
+						<div className='fixed top-0 inset-x-0 z-(--z-nav)'>
 							<Navbar />
 						</div>
 						<ToastProvider placement='bottom-center' />
-						<main>{children}</main>
+						<main id='main' className='flex-1'>
+							{children}
+						</main>
 						<Footer />
 					</div>
+					<div aria-hidden='true' className='bw-grain' />
 				</Providers>
 			</body>
 		</html>

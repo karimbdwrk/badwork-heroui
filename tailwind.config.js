@@ -10,13 +10,30 @@ const config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ["var(--font-sans)"],
-				mono: ["var(--font-roboto-mono)"],
+				sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+				mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
 			},
 		},
 	},
 	darkMode: "class",
-	plugins: [heroui()],
+	plugins: [
+		heroui({
+			themes: {
+				light: {
+					colors: {
+						background: "#f4f3f0",
+						foreground: "#1b1b1a",
+					},
+				},
+				dark: {
+					colors: {
+						background: "#0b0b0b",
+						foreground: "#ecebe7",
+					},
+				},
+			},
+		}),
+	],
 };
 
 module.exports = config;

@@ -41,24 +41,15 @@ export default function OrientationGuard() {
 
 	return (
 		<div
-			style={{
-				position: "fixed",
-				inset: 0,
-				background: "#000",
-				color: "#fff",
-				zIndex: 9999,
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				textAlign: "center",
-				userSelect: "none",
-			}}>
+			role='alertdialog'
+			aria-label='Rotate your device'
+			className='rotate-device bg-background text-foreground px-8'>
 			<div>
-				<p style={{ fontSize: "1.3rem", marginBottom: "0.8rem" }}>
+				<p className='text-xl font-semibold tracking-tight mb-3'>
 					Please rotate your device
 				</p>
-				<p style={{ opacity: 0.7 }}>
-					This experience is designed for portrait mode
+				<p className='text-sm text-bw-muted'>
+					This experience is designed for portrait mode.
 				</p>
 			</div>
 		</div>

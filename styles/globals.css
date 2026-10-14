@@ -1,3 +1,105 @@
 @import "tailwindcss";
 
-@config "../tailwind.config.js"
+@config "../tailwind.config.js";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Tokens — un seul gris neutre, légèrement chaud, décliné en clair et en sombre */
+:root {
+	--bw-bg: #f4f3f0;
+	--bw-fg: #1b1b1a;
+	--bw-muted: #6b6a66;
+	--bw-line: #dddcd7;
+	--bw-surface: #eae9e5;
+	--bw-grain-opacity: 0.05;
+}
+
+.dark {
+	--bw-bg: #0b0b0b;
+	--bw-fg: #ecebe7;
+	--bw-muted: #8a8984;
+	--bw-line: #262625;
+	--bw-surface: #151515;
+	--bw-grain-opacity: 0.07;
+}
+
+@theme inline {
+	--color-bw-bg: var(--bw-bg);
+	--color-bw-fg: var(--bw-fg);
+	--color-bw-muted: var(--bw-muted);
+	--color-bw-line: var(--bw-line);
+	--color-bw-surface: var(--bw-surface);
+	--z-nav: 50;
+	--z-overlay: 90;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	body {
+		background-color: var(--bw-bg);
+		color: var(--bw-fg);
+		font-feature-settings: "ss01", "cv11";
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	::selection {
+		background-color: var(--bw-fg);
+		color: var(--bw-bg);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--bw-fg);
+		outline-offset: 3px;
+		border-radius: 4px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+}
+
+/* Grain fixe par-dessus la page pour casser l'aplat */
+.bw-grain {
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: var(--z-overlay);
+	opacity: var(--bw-grain-opacity);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+	mix-blend-mode: overlay;
+}
+
+/* Lien d'évitement clavier */
+.bw-skip-link {
+	position: fixed;
+	top: 12px;
+	left: 12px;
+	z-index: calc(var(--z-overlay) + 1);
+	padding: 10px 16px;
+	border-radius: 6px;
+	background: var(--bw-fg);
+	color: var(--bw-bg);
+	font-size: 0.875rem;
+	transform: translateY(-160%);
+	transition: transform 200ms ease;
+}
+
+.bw-skip-link:focus-visible {
+	transform: translateY(0);
+}

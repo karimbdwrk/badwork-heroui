@@ -50,11 +50,11 @@ export const Navbar = () => {
     <HeroUINavbar maxWidth="full" 
               className={clsx(
                 "transition-opacity duration-300",
-                showLogo ? "opacity-100" : "opacity-0"
+                showLogo ? "opacity-100" : "opacity-0 pointer-events-none"
               )}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
+          <NextLink aria-label="badwork, home" className="flex justify-start items-center gap-1 rounded-sm" href="/">
               {theme && <BadworkLogo width={120} />}
           </NextLink>
         </NavbarBrand>

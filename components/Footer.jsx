@@ -1,32 +1,30 @@
-"use client";
+import NextLink from "next/link";
 
-import { Link } from "@heroui/link";
-import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+const linkClass =
+	"underline decoration-transparent underline-offset-4 transition-colors duration-200 hover:decoration-current";
 
 export default function Footer() {
-	const { theme, systemTheme } = useTheme();
-	const [mounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	// Utiliser le thème actuel ou le thème système en fallback
-	const currentTheme = mounted ? (theme === "system" ? systemTheme : theme) : "dark";
-	const linkColor = currentTheme === "dark" ? "#FFFFFF" : "#303030";
+	const year = new Date().getFullYear();
 
 	return (
-		<footer className='w-full flex flex-col items-center justify-center py-8'>
-			<Link
-				href='/legal'
-				style={{ color: linkColor }}
-				className='hover:underline underline-offset-4 text-sm select-none'>
-				Legal notice
-			</Link>
-			<p className='text-xs text-gray-600 mt-2 select-none'>
-				©2026 - badwork | digital - all rights reserved.
-			</p>
+		<footer className='w-full border-t border-bw-line'>
+			<div className='mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 sm:px-8 pt-8 pb-10 font-mono text-xs text-bw-muted sm:flex-row sm:items-center sm:justify-between'>
+				<p className='select-none tabular-nums'>
+					© {year} badwork | digital. All rights reserved.
+				</p>
+				<nav aria-label='Footer' className='flex gap-6'>
+					<a
+						href='mailto:contact@badwork.io'
+						className={`${linkClass} text-bw-fg`}>
+						contact@badwork.io
+					</a>
+					<NextLink
+						href='/legal'
+						className={`${linkClass} text-bw-fg`}>
+						Legal notice
+					</NextLink>
+				</nav>
+			</div>
 		</footer>
 	);
 }

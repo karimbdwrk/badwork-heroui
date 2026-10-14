@@ -12,10 +12,11 @@ export const metadata = {
 
 export default function LegalPage() {
 	return (
-		<main className='legal-page max-w-3xl mx-auto p-6 pt-24 pb-24'>
-			<h1 className='text-3xl font-bold mb-6'>Mentions légales</h1>
+		<article className='legal-page max-w-3xl mx-auto px-5 sm:px-8 pt-28 pb-32 text-sm sm:text-base leading-relaxed [&_p]:max-w-[68ch] [&_p]:text-bw-fg/85 [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-bw-line hover:[&_a]:decoration-bw-fg'>
+			<p className='font-mono text-xs text-bw-muted'>Legal</p>
+			<h1 className='mt-4 text-4xl sm:text-5xl font-semibold tracking-tighter mb-10'>Mentions légales</h1>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Éditeur du site
 				</h2>
 				<p>
@@ -33,7 +34,7 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Responsable de la publication
 				</h2>
 				<p>
@@ -42,7 +43,7 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>Hébergement</h2>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>Hébergement</h2>
 				<p>
 					Hébergeur : <strong>Heroku, Inc.</strong>
 					<br />
@@ -58,7 +59,7 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Propriété intellectuelle
 				</h2>
 				<p>
@@ -70,7 +71,7 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Responsabilité
 				</h2>
 				<p>
@@ -80,7 +81,7 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Données personnelles
 				</h2>
 				<p>
@@ -95,15 +96,15 @@ export default function LegalPage() {
 				</p>
 			</section>
 			<section>
-				<h2 className='text-xl font-semibold mt-6 mb-4'>
+				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>
 					Droit applicable
 				</h2>
 				<p>Le présent site est soumis au droit français.</p>
 			</section>
-			<p className='update'>
+			<p className='update mt-12 font-mono text-xs text-bw-muted'>
 				Dernière mise à jour :{" "}
 				<time dateTime='2026-01-02'>2 janvier 2026</time>
 			</p>
-		</main>
+		</article>
 	);
 }
