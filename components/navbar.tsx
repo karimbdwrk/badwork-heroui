@@ -13,14 +13,12 @@ import {
 import NextLink from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { useTheme } from "next-themes";
 
 import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "./theme-switch";
 import BadworkLogo from "./BadworkLogo";
 
 export const Navbar = () => {
-  const { theme } = useTheme();
   const pathname = usePathname();
   const isHomePage = pathname === "/";
   const [showLogo, setShowLogo] = useState(false);
@@ -55,7 +53,7 @@ export const Navbar = () => {
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink aria-label="badwork, home" className="flex justify-start items-center gap-1 rounded-sm" href="/">
-              {theme && <BadworkLogo width={120} />}
+              <BadworkLogo width={120} />
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
