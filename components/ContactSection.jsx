@@ -7,7 +7,7 @@ import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { addToast } from "@/utils/toast";
 
-const CONTACT_EMAIL = "contact@badwork.io";
+const CONTACT_EMAIL = "contact@badwork.fr";
 
 const fieldClassNames = {
 	inputWrapper:

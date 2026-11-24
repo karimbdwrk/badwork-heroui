@@ -30,7 +30,7 @@ export default function LegalPage() {
 					Localisation : <strong>Hauts-de-Seine (92), France</strong>
 					<br />
 					Email :{" "}
-					<a href='mailto:contact@badwork.io'>contact@badwork.io</a>
+					<a href='mailto:contact@badwork.fr'>contact@badwork.fr</a>
 				</p>
 			</section>
 			<section>
@@ -91,7 +91,7 @@ export default function LegalPage() {
 					<br />
 					Conformément au RGPD, vous disposez d’un droit d’accès, de
 					rectification et de suppression de vos données en contactant
-					: <a href='mailto:contact@badwork.io'>contact@badwork.io</a>
+					: <a href='mailto:contact@badwork.fr'>contact@badwork.fr</a>
 					.
 				</p>
 			</section>

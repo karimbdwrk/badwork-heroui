@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /legal
 
-Sitemap: https://badwork.io/sitemap.xml
+Sitemap: https://www.badwork.fr/sitemap.xml

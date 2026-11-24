@@ -22,13 +22,13 @@ export const metadata = {
 	icons: {
 		icon: "/favicon.ico",
 	},
-	metadataBase: new URL("https://www.badwork.io"),
+	metadataBase: new URL("https://www.badwork.fr"),
 	alternates: {
 		canonical: "/",
 	},
 	openGraph: {
 		type: "website",
-		url: "https://www.badwork.io",
+		url: "https://www.badwork.fr",
 		siteName: siteConfig.name,
 		title: siteConfig.name,
 		description: siteConfig.description,

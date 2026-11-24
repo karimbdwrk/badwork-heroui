@@ -14,9 +14,9 @@ export default function Footer() {
 				</p>
 				<nav aria-label='Footer' className='flex gap-6'>
 					<a
-						href='mailto:contact@badwork.io'
+						href='mailto:contact@badwork.fr'
 						className={`${linkClass} text-bw-fg`}>
-						contact@badwork.io
+						contact@badwork.fr
 					</a>
 					<NextLink
 						href='/legal'

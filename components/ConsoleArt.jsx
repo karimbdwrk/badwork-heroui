@@ -22,7 +22,7 @@ export default function ConsoleArt() {
 			"font-family: monospace; line-height: 1;",
 		);
 		console.log(
-			"%cTu fouilles dans le code ? On devrait parler → https://www.badwork.io",
+			"%cTu fouilles dans le code ? On devrait parler → https://www.badwork.fr",
 			"font-family: monospace; color: #888;",
 		);
 	}, []);

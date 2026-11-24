@@ -19,7 +19,7 @@ export async function POST(req: Request) {
       : 'Confirmation de réception — BADWORK';
 
     const { data, error } = await resend.emails.send({
-      from: 'BADWORK <contact@badwork.io>',
+      from: 'BADWORK <contact@badwork.fr>',
       to,
       subject: emailSubject,
       react: emailTemplate,
