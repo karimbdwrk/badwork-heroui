@@ -11,6 +11,7 @@ import { siteConfig } from "@/config/site";
 import { Navbar } from "@/components/navbar";
 import OrientationGuard from "@/components/OrientationGuard";
 import Footer from "@/components/Footer";
+import ConsoleArt from "@/components/ConsoleArt";
 
 export const metadata = {
 	title: {
@@ -88,6 +89,7 @@ export default function RootLayout({ children }) {
 						Skip to content
 					</a>
 					<OrientationGuard />
+					<ConsoleArt />
 					<div className='flex flex-col min-h-dvh'>
 						<div className='fixed top-0 inset-x-0 z-(--z-nav)'>
 							<Navbar />
