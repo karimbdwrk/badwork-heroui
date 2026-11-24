@@ -45,16 +45,16 @@ export default function LegalPage() {
 			<section>
 				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>Hébergement</h2>
 				<p>
-					Hébergeur : <strong>Heroku, Inc.</strong>
+					Hébergeur : <strong>Vercel Inc.</strong>
 					<br />
-					Adresse : 650 7th Street, San Francisco, CA 94103, USA
+					Adresse : 440 N Barranca Ave #4133, Covina, CA 91723, USA
 					<br />
 					Site web :{" "}
 					<a
-						href='https://www.heroku.com'
+						href='https://vercel.com'
 						target='_blank'
 						rel='noopener'>
-						https://www.heroku.com
+						https://vercel.com
 					</a>
 				</p>
 			</section>
@@ -103,7 +103,7 @@ export default function LegalPage() {
 			</section>
 			<p className='update mt-12 font-mono text-xs text-bw-muted'>
 				Dernière mise à jour :{" "}
-				<time dateTime='2026-01-02'>2 janvier 2026</time>
+				<time dateTime='2026-11-02'>2 novembre 2026</time>
 			</p>
 		</article>
 	);
