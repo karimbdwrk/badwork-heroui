@@ -7,15 +7,7 @@ import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
 import { Select, SelectItem } from "@heroui/select";
 import { addToast } from "@/utils/toast";
-
-const CONTACT_EMAIL = "contact@badwork.fr";
-
-const SUBJECTS = [
-	"Création de site web",
-	"Application mobile iOS / Android",
-	"Logiciel sur mesure",
-	"Autre demande",
-];
+import { CONTACT_EMAIL, CONTACT_SUBJECTS } from "@/config/contact";
 
 const fieldClassNames = {
 	inputWrapper:
@@ -60,34 +52,23 @@ const ContactSection = () => {
 		validationSchema: Yup.object({
 			name: Yup.string()
 				.min(2, "Votre nom doit contenir au moins 2 caractères")
+				.max(100, "Votre nom ne doit pas dépasser 100 caractères")
 				.required("Votre nom est requis"),
 			email: Yup.string()
 				.email("Adresse email invalide")
+				.max(254, "Adresse email trop longue")
 				.required("Votre email est requis"),
 			subject: Yup.string()
-				.oneOf(SUBJECTS, "Choisissez un objet")
+				.oneOf(CONTACT_SUBJECTS, "Choisissez un objet")
 				.required("Choisissez un objet"),
 			message: Yup.string()
 				.min(30, "Votre message doit contenir au moins 30 caractères")
+				.max(5000, "Votre message ne doit pas dépasser 5000 caractères")
 				.required("Votre message est requis"),
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			try {
-				// Le message au propriétaire doit partir ; la confirmation client est secondaire
-				await sendEmail2(
-					values.name,
-					values.email,
-					values.subject,
-					values.message
-				);
-				sendEmail(
-					values.name,
-					values.email,
-					values.subject,
-					values.message
-				).catch((err) =>
-					console.error("Confirmation email failed:", err.message)
-				);
+				await sendContact(values);
 
 				addToast({
 					title: "Message envoyé",
@@ -96,7 +77,7 @@ const ContactSection = () => {
 				setIsSend(true);
 				resetForm();
 			} catch (error) {
-				console.error("sendEmail failed:", error);
+				console.error("Envoi du formulaire échoué :", error);
 				addToast({
 					title: "Votre message n'a pas été envoyé",
 					description: `Réessayez, ou écrivez-nous à ${CONTACT_EMAIL}.`,
@@ -106,49 +87,19 @@ const ContactSection = () => {
 		},
 	});
 
-	const sendEmail = async (name, email, subject, message) => {
+	// Un seul appel : le serveur choisit les destinataires (la demande pour nous,
+	// la confirmation pour l'adresse saisie)
+	const sendContact = async (values) => {
 		const res = await fetch("/api/send-email", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({
-				to: email,
-				name,
-				email,
-				subject,
-				message,
-				isOwner: false, // Email de confirmation au client
-			}),
+			body: JSON.stringify(values),
 		});
 
 		if (!res.ok) {
-			const error = await res.json();
-			throw new Error(error?.message || "Failed to send email");
-		}
-
-		return res.json();
-	};
-
-	const sendEmail2 = async (name, email, subject, message) => {
-		const res = await fetch("/api/send-email", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				to: "karim@badwork.fr",
-				name,
-				email,
-				subject,
-				message,
-				isOwner: true, // Email au propriétaire du site
-			}),
-		});
-
-		if (!res.ok) {
-			const error = await res.json();
-			throw new Error(error?.message || "Failed to send email");
+			throw new Error(`send-email a répondu ${res.status}`);
 		}
 
 		return res.json();
@@ -238,7 +189,7 @@ const ContactSection = () => {
 								onClose={() => formik.setFieldTouched("subject", true)}
 								isInvalid={formik.touched.subject && !!formik.errors.subject}
 								errorMessage={formik.touched.subject && formik.errors.subject}>
-								{SUBJECTS.map((subject) => (
+								{CONTACT_SUBJECTS.map((subject) => (
 									<SelectItem key={subject}>{subject}</SelectItem>
 								))}
 							</Select>
