@@ -76,7 +76,7 @@ export default function ContactConfirmationEmail({
 					{/* Footer */}
 					<Section style={styles.footer}>
 						<Text style={styles.footerText}>
-							Creative development · Web · Apps · Software
+							Sites web · Applications mobiles · Logiciels
 						</Text>
 						<Text style={styles.footerTextMuted}>
 							© {new Date().getFullYear()} Badwork. Tous droits

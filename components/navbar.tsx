@@ -52,7 +52,7 @@ export const Navbar = () => {
               )}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink aria-label="badwork, home" className="flex justify-start items-center gap-1 rounded-sm" href="/">
+          <NextLink aria-label="badwork, accueil" className="flex justify-start items-center gap-1 rounded-sm" href="/">
               <BadworkLogo width={120} />
           </NextLink>
         </NavbarBrand>

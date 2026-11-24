@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html
 			suppressHydrationWarning
-			lang='en'
+			lang='fr'
 			className={clsx(geistSans.variable, geistMono.variable)}>
 			<head>
 				<Script
@@ -86,7 +86,7 @@ export default function RootLayout({ children }) {
 				<Providers
 					themeProps={{ attribute: "class", defaultTheme: "dark" }}>
 					<a href='#main' className='bw-skip-link'>
-						Skip to content
+						Aller au contenu
 					</a>
 					<OrientationGuard />
 					<ConsoleArt />

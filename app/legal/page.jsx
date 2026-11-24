@@ -5,7 +5,7 @@ export const metadata = {
 		index: false,
 		follow: false,
 	},
-	title: "Legal Notice // badwork | digital",
+	title: "Mentions légales",
 	description:
 		"Mentions légales du site. Informations légales, éditeur, hébergement et responsabilité.",
 };
@@ -13,7 +13,7 @@ export const metadata = {
 export default function LegalPage() {
 	return (
 		<article className='legal-page max-w-3xl mx-auto px-5 sm:px-8 pt-28 pb-32 text-sm sm:text-base leading-relaxed [&_p]:max-w-[68ch] [&_p]:text-bw-fg/85 [&_a]:underline [&_a]:underline-offset-4 [&_a]:decoration-bw-line hover:[&_a]:decoration-bw-fg'>
-			<p className='font-mono text-xs text-bw-muted'>Legal</p>
+			<p className='font-mono text-xs text-bw-muted'>Légal</p>
 			<h1 className='mt-4 text-4xl sm:text-5xl font-semibold tracking-tighter mb-10'>Mentions légales</h1>
 			<section>
 				<h2 className='text-lg font-medium tracking-tight mt-10 mb-3'>

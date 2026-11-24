@@ -10,9 +10,9 @@ export default function Footer() {
 		<footer className='w-full border-t border-bw-line'>
 			<div className='mx-auto flex w-full max-w-7xl flex-col gap-4 px-5 sm:px-8 pt-8 pb-10 font-mono text-xs text-bw-muted sm:flex-row sm:items-center sm:justify-between'>
 				<p className='select-none tabular-nums'>
-					© {year} badwork | digital. All rights reserved.
+					© {year} badwork | digital. Tous droits réservés.
 				</p>
-				<nav aria-label='Footer' className='flex gap-6'>
+				<nav aria-label='Pied de page' className='flex gap-6'>
 					<a
 						href='mailto:contact@badwork.fr'
 						className={`${linkClass} text-bw-fg`}>
@@ -21,7 +21,7 @@ export default function Footer() {
 					<NextLink
 						href='/legal'
 						className={`${linkClass} text-bw-fg`}>
-						Legal notice
+						Mentions légales
 					</NextLink>
 				</nav>
 			</div>

@@ -6,58 +6,58 @@ import { ArrowUpRight } from "lucide-react";
 // TODO: remplacer par les vrais projets (titre, description, image, lien)
 const projects = [
 	{
-		title: "Project One",
-		description: "A short line about what this project is and does.",
+		title: "Projet un",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-1.jpg",
-		tags: ["Next.js", "Three.js"],
+		tags: ["Site web", "Next.js"],
 		year: "2025",
 		href: "#",
 	},
 	{
-		title: "Project Two",
-		description: "A short line about what this project is and does.",
+		title: "Projet deux",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-2.jpg",
-		tags: ["React", "GSAP"],
+		tags: ["App mobile", "iOS", "Android"],
 		year: "2025",
 		href: "#",
 	},
 	{
-		title: "Project Three",
-		description: "A short line about what this project is and does.",
+		title: "Projet trois",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-3.jpg",
-		tags: ["Node.js", "Supabase"],
+		tags: ["Logiciel", "macOS", "Windows"],
 		year: "2024",
 		href: "#",
 	},
 	{
-		title: "Project Four",
-		description: "A short line about what this project is and does.",
+		title: "Projet quatre",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-4.jpg",
-		tags: ["Branding"],
+		tags: ["Site web", "E-commerce"],
 		year: "2024",
 		href: "#",
 	},
 	{
-		title: "Project Five",
-		description: "A short line about what this project is and does.",
+		title: "Projet cinq",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-5.jpg",
-		tags: ["UI Design", "Webflow"],
+		tags: ["App mobile", "iOS"],
 		year: "2024",
 		href: "#",
 	},
 	{
-		title: "Project Six",
-		description: "A short line about what this project is and does.",
+		title: "Projet six",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-6.jpg",
-		tags: ["Next.js"],
+		tags: ["Logiciel"],
 		year: "2023",
 		href: "#",
 	},
 	{
-		title: "Project Seven",
-		description: "A short line about what this project is and does.",
+		title: "Projet sept",
+		description: "Une phrase courte sur ce qu'est le projet et ce qu'il fait.",
 		image: "/projects/project-7.jpg",
-		tags: ["Three.js", "WebGL"],
+		tags: ["Site web", "Three.js"],
 		year: "2023",
 		href: "#",
 	},
@@ -110,7 +110,7 @@ function ProjectCard({ project, index }) {
 						<img
 							ref={imgRef}
 							src={project.image}
-							alt={`${project.title} — project preview`}
+							alt={`${project.title}, aperçu du projet`}
 							loading='lazy'
 							onError={() => setImageFailed(true)}
 							className='h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]'
@@ -123,7 +123,7 @@ function ProjectCard({ project, index }) {
 								{pad(index + 1)}
 							</span>
 							<span className='font-mono text-xs text-bw-muted'>
-								Preview soon
+								Aperçu bientôt
 							</span>
 						</div>
 					)}
@@ -173,17 +173,17 @@ export default function PortfolioSection() {
 			<header className='mb-16 sm:mb-24 grid gap-6 lg:grid-cols-12 lg:items-end'>
 				<div className='lg:col-span-7'>
 					<p className='font-mono text-xs text-bw-muted'>
-						(01) — Selected work
+						(01) — Projets
 					</p>
 					<h2
 						id='portfolio-title'
 						className='mt-4 text-4xl sm:text-6xl font-semibold tracking-tighter leading-[0.95]'>
-						Things we've designed and built.
+						Ce que nous avons conçu et développé.
 					</h2>
 				</div>
 				<p className='lg:col-span-4 lg:col-start-9 max-w-[40ch] text-sm sm:text-base leading-relaxed text-bw-muted'>
-					A few recent projects, from interactive brand sites to product
-					interfaces.
+					Quelques projets récents : sites web, applications iOS et Android,
+					logiciels.
 				</p>
 			</header>
 

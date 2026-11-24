@@ -1,7 +1,7 @@
 import NextLink from "next/link";
 
 export const metadata = {
-	title: "Page not found",
+	title: "Page introuvable",
 	robots: { index: false },
 };
 
@@ -12,16 +12,16 @@ export default function NotFound() {
 				404
 			</p>
 			<h1 className='mt-4 max-w-[16ch] text-4xl sm:text-6xl font-semibold tracking-tighter leading-[0.95]'>
-				This page doesn't exist.
+				Cette page n'existe pas.
 			</h1>
 			<p className='mt-6 max-w-[42ch] text-sm sm:text-base leading-relaxed text-bw-muted'>
-				The link may be outdated, or the address mistyped. Everything
-				we do lives on the home page.
+				Le lien est peut-être obsolète, ou l'adresse mal saisie. Tout
+				ce que nous faisons se trouve sur la page d'accueil.
 			</p>
 			<NextLink
 				href='/'
 				className='mt-10 inline-flex h-12 w-fit items-center rounded-md bg-foreground px-8 font-medium tracking-tight text-background transition-[transform,opacity] duration-200 hover:opacity-90 active:scale-[0.98]'>
-				Back to home
+				Retour à l'accueil
 			</NextLink>
 		</section>
 	);

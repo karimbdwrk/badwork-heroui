@@ -42,14 +42,14 @@ export default function OrientationGuard() {
 	return (
 		<div
 			role='alertdialog'
-			aria-label='Rotate your device'
+			aria-label='Tournez votre appareil'
 			className='rotate-device bg-background text-foreground px-8'>
 			<div>
 				<p className='text-xl font-semibold tracking-tight mb-3'>
-					Please rotate your device
+					Tournez votre appareil
 				</p>
 				<p className='text-sm text-bw-muted'>
-					This experience is designed for portrait mode.
+					Ce site est conçu pour être consulté en mode portrait.
 				</p>
 			</div>
 		</div>

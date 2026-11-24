@@ -31,7 +31,7 @@ export const ThemeSwitch = ({ className, classNames }) => {
 		getWrapperProps,
 	} = useSwitch({
 		isSelected: theme === "light" || isSSR,
-		"aria-label": `Switch to ${theme === "light" || isSSR ? "dark" : "light"} mode`,
+		"aria-label": `Passer en mode ${theme === "light" || isSSR ? "sombre" : "clair"}`,
 		onChange,
 	});
 

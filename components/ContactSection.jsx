@@ -5,13 +5,28 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea } from "@heroui/input";
 import { Button } from "@heroui/button";
+import { Select, SelectItem } from "@heroui/select";
 import { addToast } from "@/utils/toast";
 
 const CONTACT_EMAIL = "contact@badwork.fr";
 
+const SUBJECTS = [
+	"Création de site web",
+	"Application mobile iOS / Android",
+	"Logiciel sur mesure",
+	"Autre demande",
+];
+
 const fieldClassNames = {
 	inputWrapper:
 		"bg-bw-surface shadow-none data-[hover=true]:bg-bw-line/60 group-data-[focus=true]:bg-bw-surface rounded-md",
+	label: "text-bw-muted",
+};
+
+// Même rendu que les champs texte : le Select HeroUI expose "trigger" au lieu de "inputWrapper"
+const selectClassNames = {
+	trigger:
+		"bg-bw-surface shadow-none data-[hover=true]:bg-bw-line/60 data-[focus=true]:bg-bw-surface data-[open=true]:bg-bw-surface rounded-md",
 	label: "text-bw-muted",
 };
 
@@ -44,17 +59,17 @@ const ContactSection = () => {
 		},
 		validationSchema: Yup.object({
 			name: Yup.string()
-				.min(2, "Your name must be at least 2 characters")
-				.required("Your name is required"),
+				.min(2, "Votre nom doit contenir au moins 2 caractères")
+				.required("Votre nom est requis"),
 			email: Yup.string()
-				.email("Invalid email")
-				.required("Your email is required"),
+				.email("Adresse email invalide")
+				.required("Votre email est requis"),
 			subject: Yup.string()
-				.min(5, "Your subject must be at least 5 characters")
-				.required("Your subject is required"),
+				.oneOf(SUBJECTS, "Choisissez un objet")
+				.required("Choisissez un objet"),
 			message: Yup.string()
-				.min(30, "Your message must be at least 30 characters")
-				.required("Your message is required"),
+				.min(30, "Votre message doit contenir au moins 30 caractères")
+				.required("Votre message est requis"),
 		}),
 		onSubmit: async (values, { resetForm }) => {
 			try {
@@ -75,16 +90,16 @@ const ContactSection = () => {
 				);
 
 				addToast({
-					title: "Message sent",
-					description: "We'll get back to you within two working days.",
+					title: "Message envoyé",
+					description: "Nous revenons vers vous au plus vite.",
 				});
 				setIsSend(true);
 				resetForm();
 			} catch (error) {
 				console.error("sendEmail failed:", error);
 				addToast({
-					title: "Your message wasn't sent",
-					description: `Please try again, or write to ${CONTACT_EMAIL}.`,
+					title: "Votre message n'a pas été envoyé",
+					description: `Réessayez, ou écrivez-nous à ${CONTACT_EMAIL}.`,
 					color: "danger",
 				});
 			}
@@ -150,11 +165,6 @@ const ContactSection = () => {
 		formik.setFieldValue("email", formatted);
 	};
 
-	const handleSubjectChange = (e) => {
-		const formatted = capitalizeAfterPeriod(e.target.value);
-		formik.setFieldValue("subject", formatted);
-	};
-
 	const handleMessageChange = (e) => {
 		const formatted = capitalizeAfterPeriod(e.target.value);
 		formik.setFieldValue("message", formatted);
@@ -171,11 +181,11 @@ const ContactSection = () => {
 					<h2
 						id='contact-title'
 						className='mt-4 text-4xl sm:text-6xl font-semibold tracking-tighter leading-[0.95]'>
-						Have a project in mind?
+						Un projet en tête ?
 					</h2>
 					<p className='mt-6 max-w-[38ch] text-sm sm:text-base leading-relaxed text-bw-muted'>
-						Every great project begins with a simple message. Tell us what
-						you're building and we'll reply within two working days.
+						Tout projet commence par un simple message. Parlez-nous de ce
+						que vous imaginez, nous revenons vers vous au plus vite.
 					</p>
 					<a
 						href={`mailto:${CONTACT_EMAIL}`}
@@ -192,7 +202,7 @@ const ContactSection = () => {
 							className='contact-form grid gap-4 sm:grid-cols-2'>
 							<Input
 								name='name'
-								label='Name'
+								label='Nom'
 								isRequired
 								autoComplete='name'
 								classNames={fieldClassNames}
@@ -215,18 +225,23 @@ const ContactSection = () => {
 								isInvalid={formik.touched.email && !!formik.errors.email}
 								errorMessage={formik.touched.email && formik.errors.email}
 							/>
-							<Input
+							<Select
 								name='subject'
-								label='Subject'
+								label='Objet'
 								isRequired
 								className='sm:col-span-2'
-								classNames={fieldClassNames}
-								value={formik.values.subject}
-								onChange={handleSubjectChange}
-								onBlur={formik.handleBlur}
+								classNames={selectClassNames}
+								selectedKeys={formik.values.subject ? [formik.values.subject] : []}
+								onSelectionChange={(keys) =>
+									formik.setFieldValue("subject", Array.from(keys)[0] ?? "")
+								}
+								onClose={() => formik.setFieldTouched("subject", true)}
 								isInvalid={formik.touched.subject && !!formik.errors.subject}
-								errorMessage={formik.touched.subject && formik.errors.subject}
-							/>
+								errorMessage={formik.touched.subject && formik.errors.subject}>
+								{SUBJECTS.map((subject) => (
+									<SelectItem key={subject}>{subject}</SelectItem>
+								))}
+							</Select>
 							<Textarea
 								name='message'
 								label='Message'
@@ -242,9 +257,9 @@ const ContactSection = () => {
 							/>
 							<div className='sm:col-span-2 mt-2 flex flex-wrap items-center justify-between gap-4'>
 								<p className='font-mono text-xs tabular-nums text-bw-muted'>
-									{formik.values.message.length} characters
+									{formik.values.message.length} caractères
 									{formik.values.message.length < 30 &&
-										` · ${30 - formik.values.message.length} more needed`}
+										` · encore ${30 - formik.values.message.length} minimum`}
 								</p>
 								<Button
 									type='submit'
@@ -252,7 +267,7 @@ const ContactSection = () => {
 									className='h-12 px-8 bg-foreground text-background font-medium tracking-tight transition-[transform,opacity] duration-200 hover:opacity-90 data-[pressed=true]:scale-[0.98]'
 									isLoading={formik.isSubmitting}
 									isDisabled={formik.isSubmitting}>
-									{formik.isSubmitting ? "Sending…" : "Send message"}
+									{formik.isSubmitting ? "Envoi…" : "Envoyer le message"}
 								</Button>
 							</div>
 						</form>
@@ -261,20 +276,20 @@ const ContactSection = () => {
 							role='status'
 							className='flex h-full flex-col justify-center rounded-lg bg-bw-surface p-8 sm:p-12'>
 							<p className='font-mono text-xs text-bw-muted'>
-								Message received
+								Message reçu
 							</p>
 							<h3 className='mt-4 text-2xl sm:text-3xl font-semibold tracking-tight'>
-								Thanks for reaching out.
+								Merci pour votre message.
 							</h3>
 							<p className='mt-4 max-w-[42ch] text-sm sm:text-base leading-relaxed text-bw-muted'>
-								We've sent a confirmation to your inbox and will get back to you
-								shortly.
+								Une confirmation vient de vous être envoyée par email. Nous
+								revenons vers vous très vite.
 							</p>
 							<button
 								type='button'
 								onClick={() => setIsSend(false)}
 								className='mt-8 self-start text-sm underline decoration-bw-line underline-offset-[6px] transition-colors duration-200 hover:decoration-bw-fg'>
-								Send another message
+								Envoyer un autre message
 							</button>
 						</div>
 					)}

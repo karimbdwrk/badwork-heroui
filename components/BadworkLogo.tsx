@@ -29,7 +29,7 @@ export default function BadworkLogo({
             width={width}
             xmlns="http://www.w3.org/2000/svg"
             role="img"
-            aria-label="BADWORK logo"
+            aria-label="Logo BADWORK"
             className={className}
         >
             <g fill={fillColor}>
