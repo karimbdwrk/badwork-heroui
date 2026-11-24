@@ -29,13 +29,54 @@ const projects = [
 		year: "2024",
 		href: "#",
 	},
+	{
+		title: "Project Four",
+		description: "A short line about what this project is and does.",
+		image: "/projects/project-4.jpg",
+		tags: ["Branding"],
+		year: "2024",
+		href: "#",
+	},
+	{
+		title: "Project Five",
+		description: "A short line about what this project is and does.",
+		image: "/projects/project-5.jpg",
+		tags: ["UI Design", "Webflow"],
+		year: "2024",
+		href: "#",
+	},
+	{
+		title: "Project Six",
+		description: "A short line about what this project is and does.",
+		image: "/projects/project-6.jpg",
+		tags: ["Next.js"],
+		year: "2023",
+		href: "#",
+	},
+	{
+		title: "Project Seven",
+		description: "A short line about what this project is and does.",
+		image: "/projects/project-7.jpg",
+		tags: ["Three.js", "WebGL"],
+		year: "2023",
+		href: "#",
+	},
 ];
 
-// Grille asymétrique : chaque projet prend une place et un ratio différents
+// Composition pensée pour 7 projets : un projet phare pleine largeur,
+// puis trois rangées qui alternent grand/petit et décalages verticaux
 const layouts = [
+	{
+		cell: "lg:col-span-12",
+		ratio: "aspect-[4/3] sm:aspect-[16/9] lg:aspect-[21/9]",
+		featured: true,
+	},
 	{ cell: "lg:col-span-7", ratio: "aspect-[4/3]" },
 	{ cell: "lg:col-span-5 lg:mt-40", ratio: "aspect-[4/5]" },
-	{ cell: "lg:col-span-6 lg:col-start-3", ratio: "aspect-[16/10]" },
+	{ cell: "lg:col-span-5 lg:col-start-2", ratio: "aspect-[4/5]" },
+	{ cell: "lg:col-span-5 lg:col-start-8 lg:mt-32", ratio: "aspect-square" },
+	{ cell: "lg:col-span-4", ratio: "aspect-[3/4]" },
+	{ cell: "lg:col-span-7 lg:col-start-6 lg:mt-24", ratio: "aspect-[16/10]" },
 ];
 
 const pad = (n) => String(n).padStart(2, "0");
@@ -98,7 +139,12 @@ function ProjectCard({ project, index }) {
 					<span className='font-mono text-xs tabular-nums text-bw-muted'>
 						{pad(index + 1)}
 					</span>
-					<h3 className='text-lg sm:text-xl font-medium tracking-tight'>
+					<h3
+						className={`font-medium tracking-tight ${
+							layout.featured
+								? "text-2xl sm:text-3xl"
+								: "text-lg sm:text-xl"
+						}`}>
 						{project.title}
 					</h3>
 					<span className='font-mono text-xs tabular-nums text-bw-muted'>
