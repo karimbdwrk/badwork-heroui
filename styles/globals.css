@@ -103,3 +103,15 @@
 .bw-skip-link:focus-visible {
 	transform: translateY(0);
 }
+
+/* Carrousel des stacks (components/StackSection.jsx) : nom au survol en mono, comme les libellés du site */
+.stack-loop .logoloop__tip {
+	font-family: var(--font-geist-mono), ui-monospace, monospace;
+	font-weight: 400;
+	color: var(--bw-fg);
+}
+
+/* Zoom léger au survol (LogoLoop applique 1.2 par défaut) */
+.stack-loop.logoloop--scale-hover .logoloop__item:hover .logoloop__node {
+	transform: scale(1.12);
+}
