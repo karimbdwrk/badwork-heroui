@@ -1,11 +1,16 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useTheme } from "next-themes";
 
-// Charger Dither côté client uniquement
-const Dither = dynamic(() => import("@/components/Dither"), { ssr: false });
+// WebGL2 : rendu côté client uniquement
+const SwarmCursor = dynamic(() => import("@/components/SwarmCursor"), {
+	ssr: false,
+});
 
 export default function HeroBackground() {
+	const { resolvedTheme } = useTheme();
+
 	return (
 		<div
 			style={{
@@ -16,16 +21,8 @@ export default function HeroBackground() {
 				top: 0,
 				left: 0,
 			}}>
-			<Dither
-				waveColor={[0.5, 0.5, 0.5]}
-				disableAnimation={false}
-				enableMouseInteraction={true}
-				mouseRadius={0.3}
-				colorNum={4}
-				waveAmplitude={0.3}
-				waveFrequency={3}
-				waveSpeed={0.05}
-			/>
+			{/* Particules noires sur fond blanc en thème clair, blanches en sombre */}
+			<SwarmCursor lightMode={resolvedTheme === "light"} />
 		</div>
 	);
 }
