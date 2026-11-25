@@ -38,7 +38,8 @@ import {
 
 // Au repos : logos gris (currentColor). Au survol : couleur officielle de la
 // marque. Les marques noires (Next.js, Vercel, GitHub…) prennent la couleur du
-// texte, sinon elles disparaîtraient sur le fond sombre.
+// texte, sinon elles disparaîtraient sur le fond sombre. Idem pour les couleurs
+// peu lisibles sur l’un des thèmes (PocketBase, Mailchimp, WebGL, Motion).
 const INK = "var(--bw-fg)";
 
 const stack = [
@@ -53,23 +54,23 @@ const stack = [
 	{ node: <SiNodedotjs />, title: "Node.js", color: "#5FA04E" },
 	{ node: <SiExpress />, title: "Express", color: INK },
 	{ node: <SiSupabase />, title: "Supabase", color: "#3FCF8E" },
-	{ node: <SiPocketbase />, title: "PocketBase", color: "#B8DBE4" },
+	{ node: <SiPocketbase />, title: "PocketBase", color: INK },
 	{ node: <LivekitIcon />, title: "LiveKit", color: INK },
 	{ node: <SiStrapi />, title: "Strapi", color: "#4945FF" },
 	{ node: <SiShopify />, title: "Shopify", color: "#95BF47" },
 	{ node: <SiStripe />, title: "Stripe", color: "#635BFF" },
 	{ node: <MollieIcon />, title: "Mollie", color: INK },
 	{ node: <ResendIcon />, title: "Resend", color: INK },
-	{ node: <SiMailchimp />, title: "Mailchimp", color: "#FFE01B" },
+	{ node: <SiMailchimp />, title: "Mailchimp", color: INK },
 	{ node: <SiDocker />, title: "Docker", color: "#2496ED" },
 	{ node: <SiKubernetes />, title: "Kubernetes", color: "#326CE5" },
 	{ node: <SiGithub />, title: "GitHub", color: INK },
 	{ node: <SiVercel />, title: "Vercel", color: INK },
 	{ node: <SiThreedotjs />, title: "Three.js", color: INK },
-	{ node: <SiWebgl />, title: "WebGL", color: "#990000" },
+	{ node: <SiWebgl />, title: "WebGL", color: INK },
 	// Logo de Framer, la société qui a créé Framer Motion
 	{ node: <SiFramer />, title: "Framer Motion", color: "#0055FF" },
-	{ node: <MotionIcon />, title: "Motion", color: "#FFE023" },
+	{ node: <MotionIcon />, title: "Motion", color: INK },
 	{ node: <SiElectron />, title: "Electron", color: "#47848F" },
 	{ node: <SiFigma />, title: "Figma", color: "#F24E1E" },
 	{
