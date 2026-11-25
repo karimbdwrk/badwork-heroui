@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Input, Textarea } from "@heroui/input";
@@ -24,6 +24,7 @@ const selectClassNames = {
 
 const ContactSection = () => {
 	const [isSend, setIsSend] = useState(false);
+	const subjectPicked = useRef(false);
 
 	// Fonction pour capitaliser la première lettre de chaque mot
 	const capitalizeWords = (str) => {
@@ -183,10 +184,21 @@ const ContactSection = () => {
 								className='sm:col-span-2'
 								classNames={selectClassNames}
 								selectedKeys={formik.values.subject ? [formik.values.subject] : []}
-								onSelectionChange={(keys) =>
-									formik.setFieldValue("subject", Array.from(keys)[0] ?? "")
-								}
-								onClose={() => formik.setFieldTouched("subject", true)}
+								onSelectionChange={(keys) => {
+									subjectPicked.current = true;
+									formik.setFieldValue("subject", Array.from(keys)[0] ?? "");
+								}}
+								// La liste se ferme juste après la sélection, avant que Formik ait la
+								// nouvelle valeur : on ne revalide que si rien n'a été choisi
+								onClose={() => {
+									const picked = subjectPicked.current;
+									subjectPicked.current = false;
+									formik.setFieldTouched(
+										"subject",
+										true,
+										!picked && !formik.values.subject
+									);
+								}}
 								isInvalid={formik.touched.subject && !!formik.errors.subject}
 								errorMessage={formik.touched.subject && formik.errors.subject}>
 								{CONTACT_SUBJECTS.map((subject) => (
