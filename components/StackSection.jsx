@@ -23,6 +23,7 @@ import {
 	SiStripe,
 	SiGithub,
 	SiAdobecreativecloud,
+	SiFramer,
 } from "react-icons/si";
 import LogoLoop from "@/components/LogoLoop";
 import { GluestackIcon, MollieIcon } from "@/components/StackIcons";
@@ -54,6 +55,8 @@ const stack = [
 	{ node: <SiVercel />, title: "Vercel", color: INK },
 	{ node: <SiThreedotjs />, title: "Three.js", color: INK },
 	{ node: <SiWebgl />, title: "WebGL", color: "#990000" },
+	// Logo de Framer, la société qui a créé Framer Motion
+	{ node: <SiFramer />, title: "Framer Motion", color: "#0055FF" },
 	{ node: <SiElectron />, title: "Electron", color: "#47848F" },
 	{ node: <SiFigma />, title: "Figma", color: "#F24E1E" },
 	{
