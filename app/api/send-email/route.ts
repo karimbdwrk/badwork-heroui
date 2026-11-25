@@ -91,7 +91,7 @@ export async function POST(req: Request) {
       from: FROM,
       to: email,
       subject: 'Confirmation de réception — BADWORK',
-      react: ContactConfirmationEmail({ name, email, subject, message }),
+      react: ContactConfirmationEmail({ name, subject, message }),
     });
 
     if (confirmation.error) {
