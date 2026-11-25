@@ -22,3 +22,46 @@ export function MollieIcon() {
 		</svg>
 	);
 }
+
+// Motion (motion.dev, ex-Framer Motion) : symbole repris du favicon officiel.
+// Plus large que haut (≈ 2.8:1), réduit à 0.7em de haut.
+export function MotionIcon() {
+	return (
+		<svg viewBox="0 0 25.364 9" width="1.97em" height="0.7em" fill="currentColor" aria-hidden="true">
+			<path d="M 9.587 0 L 4.57 9 L 0 9 L 3.917 1.972 C 4.524 0.883 6.039 0 7.301 0 Z M 20.794 2.25 C 20.794 1.007 21.817 0 23.079 0 C 24.341 0 25.364 1.007 25.364 2.25 C 25.364 3.493 24.341 4.5 23.079 4.5 C 21.817 4.5 20.794 3.493 20.794 2.25 Z M 10.443 0 L 15.013 0 L 9.997 9 L 5.427 9 Z M 15.841 0 L 20.411 0 L 16.494 7.028 C 15.887 8.117 14.372 9 13.11 9 L 10.825 9 Z" />
+		</svg>
+	);
+}
+
+// LiveKit : logo Simple Icons (simple-icons 15.17, absent de la version de react-icons du projet)
+export function LivekitIcon() {
+	return (
+		<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+			<path d="M0 0v24h14.4v-4.799h4.8V24H24v-4.8h-4.799v-4.8h-4.8v4.8H4.8V0H0zm14.4 14.4V9.602h4.801V4.8H24V0h-4.8v4.8h-4.8v4.8H9.6v4.8h4.8z" />
+		</svg>
+	);
+}
+
+// Uniwind : symbole « pinwheel » repris de l'en-tête de uniwind.dev (tracé au trait)
+export function UniwindIcon() {
+	return (
+		<svg viewBox="0 0 192 192" width="1em" height="1em" fill="none" aria-hidden="true">
+			<path
+				stroke="currentColor"
+				strokeLinejoin="round"
+				strokeWidth="12"
+				d="M96 22v74c20.435 0 37-16.566 37-37s-16.565-37-37-37Zm0 74v74c-20.434 0-37-16.565-37-37s16.566-37 37-37Zm74 0H96c0 20.435 16.565 37 37 37s37-16.565 37-37Zm-74 0H22c0-20.434 16.566-37 37-37s37 16.566 37 37Z"
+			/>
+		</svg>
+	);
+}
+
+// Resend : symbole officiel du kit de marque (cdn.resend.com/brand/resend-icon-black.svg),
+// recadré sur le dessin ; celui de react-icons n'est pas le logo actuel
+export function ResendIcon() {
+	return (
+		<svg viewBox="450 450 900 900" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+			<path d="M1000.46 450C1174.77 450 1278.43 553.669 1278.43 691.282C1278.43 828.896 1174.77 932.563 1000.46 932.563H912.382L1350 1350H1040.82L707.794 1033.48C683.944 1011.47 672.936 985.781 672.935 963.765C672.935 932.572 694.959 905.049 737.161 893.122L908.712 847.244C973.85 829.812 1018.81 779.353 1018.81 713.298C1018.8 632.567 952.745 585.78 871.095 585.78H450V450H1000.46Z" />
+		</svg>
+	);
+}

@@ -24,9 +24,17 @@ import {
 	SiGithub,
 	SiAdobecreativecloud,
 	SiFramer,
+	SiMailchimp,
 } from "react-icons/si";
 import LogoLoop from "@/components/LogoLoop";
-import { GluestackIcon, MollieIcon } from "@/components/StackIcons";
+import {
+	GluestackIcon,
+	MollieIcon,
+	MotionIcon,
+	LivekitIcon,
+	UniwindIcon,
+	ResendIcon,
+} from "@/components/StackIcons";
 
 // Au repos : logos gris (currentColor). Au survol : couleur officielle de la
 // marque. Les marques noires (Next.js, Vercel, GitHub…) prennent la couleur du
@@ -41,14 +49,18 @@ const stack = [
 	{ node: <SiTailwindcss />, title: "Tailwind CSS", color: "#06B6D4" },
 	{ node: <SiShadcnui />, title: "shadcn/ui", color: INK },
 	{ node: <GluestackIcon />, title: "gluestack-ui", color: INK },
+	{ node: <UniwindIcon />, title: "Uniwind", color: INK },
 	{ node: <SiNodedotjs />, title: "Node.js", color: "#5FA04E" },
 	{ node: <SiExpress />, title: "Express", color: INK },
 	{ node: <SiSupabase />, title: "Supabase", color: "#3FCF8E" },
 	{ node: <SiPocketbase />, title: "PocketBase", color: "#B8DBE4" },
+	{ node: <LivekitIcon />, title: "LiveKit", color: INK },
 	{ node: <SiStrapi />, title: "Strapi", color: "#4945FF" },
 	{ node: <SiShopify />, title: "Shopify", color: "#95BF47" },
 	{ node: <SiStripe />, title: "Stripe", color: "#635BFF" },
 	{ node: <MollieIcon />, title: "Mollie", color: INK },
+	{ node: <ResendIcon />, title: "Resend", color: INK },
+	{ node: <SiMailchimp />, title: "Mailchimp", color: "#FFE01B" },
 	{ node: <SiDocker />, title: "Docker", color: "#2496ED" },
 	{ node: <SiKubernetes />, title: "Kubernetes", color: "#326CE5" },
 	{ node: <SiGithub />, title: "GitHub", color: INK },
@@ -57,6 +69,7 @@ const stack = [
 	{ node: <SiWebgl />, title: "WebGL", color: "#990000" },
 	// Logo de Framer, la société qui a créé Framer Motion
 	{ node: <SiFramer />, title: "Framer Motion", color: "#0055FF" },
+	{ node: <MotionIcon />, title: "Motion", color: "#FFE023" },
 	{ node: <SiElectron />, title: "Electron", color: "#47848F" },
 	{ node: <SiFigma />, title: "Figma", color: "#F24E1E" },
 	{
