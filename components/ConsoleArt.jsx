@@ -22,8 +22,9 @@ export default function ConsoleArt() {
 			"font-family: monospace; line-height: 1;",
 		);
 		console.log(
-			"%cTu fouilles dans le code ? On devrait parler → https://www.badwork.fr",
-			"font-family: monospace; color: #888;",
+			"%c> Ouvrir la console, c'est déjà parler la même langue.\n> Next.js · WebGL · iOS / Android · desktop\n> Une idée, un bug, un side project ? → %cmailto:dev@badwork.fr",
+			"font-family: monospace; color: #888; line-height: 1.6;",
+			"font-family: monospace; color: inherit; text-decoration: underline;",
 		);
 	}, []);
 
